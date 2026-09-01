@@ -1,0 +1,191 @@
+{
+  "starting_balance": 10000.0,
+  "final_balance": 689.184661106601,
+  "total_trades": 4109,
+  "winning_trades": 1300,
+  "losing_trades": 2809,
+  "breakeven_trades": 0,
+  "win_rate": 0.3163786809442687,
+  "gross_profit": 12345.294322633074,
+  "gross_loss": 21656.10966152646,
+  "net_profit": -9310.815338893386,
+  "profit_factor": 0.5700605748485529,
+  "avg_winning_trade": 9.496380248179287,
+  "avg_losing_trade": -7.709544201326615,
+  "expectancy_per_trade": -2.265956519565195,
+  "expectancy_pips": -1.565956519565195,
+  "max_drawdown": 9337.938650025297,
+  "max_drawdown_pct": 93.20587213276166,
+  "longest_winning_streak": 6,
+  "longest_losing_streak": 21,
+  "total_return": -0.9310815338893386,
+  "total_return_pct": -93.10815338893386,
+  "monthly": [
+    {
+      "month": "2025-06",
+      "trades": 149,
+      "wins": 45,
+      "losses": 104,
+      "win_rate": 0.30201342281879195,
+      "total_pips": -374.1271056003219,
+      "total_money": -478.42710560032185
+    },
+    {
+      "month": "2025-07",
+      "trades": 319,
+      "wins": 96,
+      "losses": 223,
+      "win_rate": 0.30094043887147337,
+      "total_pips": -847.6327105073382,
+      "total_money": -1070.932710507338
+    },
+    {
+      "month": "2025-08",
+      "trades": 283,
+      "wins": 79,
+      "losses": 204,
+      "win_rate": 0.2791519434628975,
+      "total_pips": -677.035916147954,
+      "total_money": -875.135916147954
+    },
+    {
+      "month": "2025-09",
+      "trades": 292,
+      "wins": 100,
+      "losses": 192,
+      "win_rate": 0.3424657534246575,
+      "total_pips": -417.1337513636527,
+      "total_money": -621.5337513636526
+    },
+    {
+      "month": "2025-10",
+      "trades": 301,
+      "wins": 94,
+      "losses": 207,
+      "win_rate": 0.3122923588039867,
+      "total_pips": -573.003755963262,
+      "total_money": -783.703755963262
+    },
+    {
+      "month": "2025-11",
+      "trades": 278,
+      "wins": 83,
+      "losses": 195,
+      "win_rate": 0.29856115107913667,
+      "total_pips": -478.14291599335286,
+      "total_money": -672.7429159933529
+    },
+    {
+      "month": "2025-12",
+      "trades": 314,
+      "wins": 95,
+      "losses": 219,
+      "win_rate": 0.30254777070063693,
+      "total_pips": -486.0609935951087,
+      "total_money": -705.8609935951087
+    },
+    {
+      "month": "2026-01",
+      "trades": 292,
+      "wins": 103,
+      "losses": 189,
+      "win_rate": 0.3527397260273973,
+      "total_pips": -181.85348053028986,
+      "total_money": -386.2534805302898
+    },
+    {
+      "month": "2026-02",
+      "trades": 270,
+      "wins": 81,
+      "losses": 189,
+      "win_rate": 0.3,
+      "total_pips": -351.55543953385103,
+      "total_money": -540.555439533851
+    },
+    {
+      "month": "2026-03",
+      "trades": 293,
+      "wins": 91,
+      "losses": 202,
+      "win_rate": 0.310580204778157,
+      "total_pips": -579.6153161811282,
+      "total_money": -784.7153161811281
+    },
+    {
+      "month": "2026-04",
+      "trades": 256,
+      "wins": 92,
+      "losses": 164,
+      "win_rate": 0.359375,
+      "total_pips": -171.1676738962931,
+      "total_money": -350.367673896293
+    },
+    {
+      "month": "2026-05",
+      "trades": 242,
+      "wins": 90,
+      "losses": 152,
+      "win_rate": 0.371900826446281,
+      "total_pips": -127.05596243451873,
+      "total_money": -296.4559624345187
+    },
+    {
+      "month": "2026-06",
+      "trades": 262,
+      "wins": 80,
+      "losses": 182,
+      "win_rate": 0.3053435114503817,
+      "total_pips": -386.56769210564175,
+      "total_money": -569.9676921056417
+    },
+    {
+      "month": "2026-07",
+      "trades": 302,
+      "wins": 82,
+      "losses": 220,
+      "win_rate": 0.271523178807947,
+      "total_pips": -529.2311030268562,
+      "total_money": -740.6311030268562
+    },
+    {
+      "month": "2026-08",
+      "trades": 244,
+      "wins": 84,
+      "losses": 160,
+      "win_rate": 0.3442622950819672,
+      "total_pips": -254.5599875404857,
+      "total_money": -425.35998754048575
+    },
+    {
+      "month": "2026-09",
+      "trades": 12,
+      "wins": 5,
+      "losses": 7,
+      "win_rate": 0.4166666666666667,
+      "total_pips": 0.2284655266691189,
+      "total_money": -8.171534473330883
+    }
+  ],
+  "long_performance": [
+    {
+      "trades": 1940,
+      "wins": 583,
+      "losses": 1357,
+      "win_rate": 0.30051546391752576,
+      "net_pips": -3641.057249714585,
+      "net_money": -4999.057249714584,
+      "profit_factor": 0.5239332659148341
+    }
+  ],
+  "short_performance": [
+    {
+      "trades": 2169,
+      "wins": 717,
+      "losses": 1452,
+      "win_rate": 0.330567081604426,
+      "net_pips": -2793.458089178801,
+      "net_money": -4311.7580891788,
+      "profit_factor": 0.6134810703220028
+    }
+  ]
+}
