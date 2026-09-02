@@ -1,0 +1,103 @@
+{
+  "columns_present": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "expected_columns": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "time_na_count": 0,
+  "first_timestamp": "2025-06-16 23:30:00",
+  "last_timestamp": "2026-09-01 18:20:00",
+  "date_range_days": 441.78472222222223,
+  "timezone_detected": "UTC-naive (no tz info in file); treated as UTC server time",
+  "time_well_formed": true,
+  "duplicate_timestamps": 0,
+  "dominant_bar_minutes": 5,
+  "expected_bar_minutes": 5,
+  "cadence_matches_expected": true,
+  "time_column_sorted": true,
+  "gap_count": 96,
+  "weekend_gap_count": 65,
+  "non_weekend_gap_count": 31,
+  "largest_gap_minutes": 2945.0,
+  "missing_bars_est": 37235,
+  "missing_bars_weekend_only_est": 36913,
+  "missing_bars_non_weekend_est": 322,
+  "ohlc_na": 0,
+  "high_lt_low": 0,
+  "neg_or_zero_ohlc": 0,
+  "close_outside_range": 0,
+  "open_outside_range": 0,
+  "flat_bars_hl_eq_0": 38,
+  "median_bar_range": 0.00029999999999996696,
+  "bars_gt_50x_median_range": 0,
+  "spread_present": true,
+  "spread_na": 0,
+  "spread_positive_count": 48549,
+  "spread_zero_count": 41451,
+  "spread_negative_count": 0,
+  "spread_mean_points": 5.415641928772993,
+  "spread_min_points": 1.0,
+  "spread_max_points": 176.0,
+  "spread_zeros_at_tail": 200,
+  "spread_constant_everywhere": false,
+  "spread_zero_by_weekday": {
+    "weekday_0": {
+      "zero": 8760,
+      "total": 18122,
+      "zero_pct": 48.33903542655336
+    },
+    "weekday_1": {
+      "zero": 8468,
+      "total": 18359,
+      "zero_pct": 46.12451658587069
+    },
+    "weekday_2": {
+      "zero": 8205,
+      "total": 18142,
+      "zero_pct": 45.22654613603792
+    },
+    "weekday_3": {
+      "zero": 7843,
+      "total": 17405,
+      "zero_pct": 45.061763860959495
+    },
+    "weekday_4": {
+      "zero": 8175,
+      "total": 17972,
+      "zero_pct": 45.48742488315157
+    },
+    "weekday_5": {
+      "zero": 0,
+      "total": 0,
+      "zero_pct": null
+    },
+    "weekday_6": {
+      "zero": 0,
+      "total": 0,
+      "zero_pct": null
+    }
+  },
+  "spread_nonzero_samples": 48549,
+  "tick_volume_present": true,
+  "real_volume_present": true,
+  "tick_volume_zero_count": 0,
+  "tick_volume_sum": 31219120,
+  "real_volume_zero_count": 90000,
+  "real_volume_sum": 0,
+  "total_rows": 90000
+}

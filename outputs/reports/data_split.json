@@ -1,0 +1,19 @@
+{
+  "method": "fraction",
+  "fractions": {
+    "dev": 0.6,
+    "val": 0.2,
+    "holdout": 0.2
+  },
+  "cutoffs": null,
+  "first": "2025-06-16 23:30:00",
+  "last": "2026-09-01 18:20:00",
+  "counts": {
+    "dev": 54000,
+    "val": 18000,
+    "holdout": 18000
+  },
+  "date_range_days": 441.78472222222223,
+  "run_id": "ec85a975bea2",
+  "dataset_rows": 90000
+}
