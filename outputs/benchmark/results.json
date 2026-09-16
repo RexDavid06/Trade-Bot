@@ -1,0 +1,394 @@
+{
+  "eurusd": {
+    "dev": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 2578,
+        "win_rate": 31.15,
+        "profit_factor": 0.556,
+        "expectancy_pips": -1.74,
+        "net_profit": -6291.42,
+        "max_drawdown_pct": 62.96,
+        "total_return_pct": -62.91
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 3785,
+        "win_rate": 34.85,
+        "profit_factor": 0.667,
+        "expectancy_pips": -1.073,
+        "net_profit": -6711.78,
+        "max_drawdown_pct": 67.68,
+        "total_return_pct": -67.12
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 1375,
+        "win_rate": 35.13,
+        "profit_factor": 0.716,
+        "expectancy_pips": -0.894,
+        "net_profit": -2192.13,
+        "max_drawdown_pct": 22.53,
+        "total_return_pct": -21.92
+      }
+    },
+    "val": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 729,
+        "win_rate": 33.74,
+        "profit_factor": 0.652,
+        "expectancy_pips": -1.096,
+        "net_profit": -1309.63,
+        "max_drawdown_pct": 13.22,
+        "total_return_pct": -13.1
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1100,
+        "win_rate": 34.64,
+        "profit_factor": 0.683,
+        "expectancy_pips": -0.948,
+        "net_profit": -1812.33,
+        "max_drawdown_pct": 18.31,
+        "total_return_pct": -18.12
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 432,
+        "win_rate": 33.8,
+        "profit_factor": 0.687,
+        "expectancy_pips": -1.029,
+        "net_profit": -747.01,
+        "max_drawdown_pct": 8.51,
+        "total_return_pct": -7.47
+      }
+    },
+    "holdout": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 766,
+        "win_rate": 31.85,
+        "profit_factor": 0.537,
+        "expectancy_pips": -1.257,
+        "net_profit": -1498.69,
+        "max_drawdown_pct": 15.07,
+        "total_return_pct": -14.99
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1101,
+        "win_rate": 35.79,
+        "profit_factor": 0.663,
+        "expectancy_pips": -0.691,
+        "net_profit": -1531.83,
+        "max_drawdown_pct": 15.34,
+        "total_return_pct": -15.32
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 421,
+        "win_rate": 33.73,
+        "profit_factor": 0.639,
+        "expectancy_pips": -0.966,
+        "net_profit": -701.39,
+        "max_drawdown_pct": 7.18,
+        "total_return_pct": -7.01
+      }
+    }
+  },
+  "eurgbp": {
+    "dev": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 2362,
+        "win_rate": 29.76,
+        "profit_factor": 0.246,
+        "expectancy_pips": -2.839,
+        "net_profit": -8358.53,
+        "max_drawdown_pct": 83.6,
+        "total_return_pct": -83.59
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 3498,
+        "win_rate": 32.36,
+        "profit_factor": 0.296,
+        "expectancy_pips": -2.43,
+        "net_profit": -10947.04,
+        "max_drawdown_pct": 109.68,
+        "total_return_pct": -109.47
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 1268,
+        "win_rate": 31.78,
+        "profit_factor": 0.312,
+        "expectancy_pips": -2.475,
+        "net_profit": -4025.36,
+        "max_drawdown_pct": 40.29,
+        "total_return_pct": -40.25
+      }
+    },
+    "val": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 742,
+        "win_rate": 31.67,
+        "profit_factor": 0.308,
+        "expectancy_pips": -1.659,
+        "net_profit": -1750.59,
+        "max_drawdown_pct": 17.55,
+        "total_return_pct": -17.51
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1041,
+        "win_rate": 35.64,
+        "profit_factor": 0.418,
+        "expectancy_pips": -1.085,
+        "net_profit": -1857.92,
+        "max_drawdown_pct": 18.73,
+        "total_return_pct": -18.58
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 401,
+        "win_rate": 38.15,
+        "profit_factor": 0.478,
+        "expectancy_pips": -0.852,
+        "net_profit": -622.28,
+        "max_drawdown_pct": 6.22,
+        "total_return_pct": -6.22
+      }
+    },
+    "holdout": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 727,
+        "win_rate": 28.34,
+        "profit_factor": 0.255,
+        "expectancy_pips": -1.535,
+        "net_profit": -1624.61,
+        "max_drawdown_pct": 16.31,
+        "total_return_pct": -16.25
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1159,
+        "win_rate": 38.74,
+        "profit_factor": 0.407,
+        "expectancy_pips": -0.833,
+        "net_profit": -1776.19,
+        "max_drawdown_pct": 17.76,
+        "total_return_pct": -17.76
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 415,
+        "win_rate": 36.39,
+        "profit_factor": 0.433,
+        "expectancy_pips": -0.875,
+        "net_profit": -653.58,
+        "max_drawdown_pct": 6.59,
+        "total_return_pct": -6.54
+      }
+    }
+  },
+  "eurjpy": {
+    "dev": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 2440,
+        "win_rate": 32.42,
+        "profit_factor": 0.943,
+        "expectancy_pips": -37.461,
+        "net_profit": -93112.34,
+        "max_drawdown_pct": 491.67,
+        "total_return_pct": -931.12
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 3691,
+        "win_rate": 35.76,
+        "profit_factor": 1.091,
+        "expectancy_pips": 60.284,
+        "net_profit": 219922.79,
+        "max_drawdown_pct": 236.12,
+        "total_return_pct": 2199.23
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 1265,
+        "win_rate": 35.49,
+        "profit_factor": 1.108,
+        "expectancy_pips": 75.073,
+        "net_profit": 94081.38,
+        "max_drawdown_pct": 188.01,
+        "total_return_pct": 940.81
+      }
+    },
+    "val": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 779,
+        "win_rate": 31.32,
+        "profit_factor": 0.866,
+        "expectancy_pips": -71.041,
+        "net_profit": -55886.42,
+        "max_drawdown_pct": 357.46,
+        "total_return_pct": -558.86
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1218,
+        "win_rate": 34.24,
+        "profit_factor": 1.008,
+        "expectancy_pips": 5.044,
+        "net_profit": 5290.63,
+        "max_drawdown_pct": 141.42,
+        "total_return_pct": 52.91
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 445,
+        "win_rate": 33.93,
+        "profit_factor": 1.009,
+        "expectancy_pips": 6.033,
+        "net_profit": 2373.4,
+        "max_drawdown_pct": 197.16,
+        "total_return_pct": 23.73
+      }
+    },
+    "holdout": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 775,
+        "win_rate": 33.94,
+        "profit_factor": 1.12,
+        "expectancy_pips": 60.787,
+        "net_profit": 46567.52,
+        "max_drawdown_pct": 92.99,
+        "total_return_pct": 465.68
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1209,
+        "win_rate": 34.49,
+        "profit_factor": 0.992,
+        "expectancy_pips": -3.983,
+        "net_profit": -5661.69,
+        "max_drawdown_pct": 259.16,
+        "total_return_pct": -56.62
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 441,
+        "win_rate": 34.24,
+        "profit_factor": 0.954,
+        "expectancy_pips": -29.003,
+        "net_profit": -13099.1,
+        "max_drawdown_pct": 174.62,
+        "total_return_pct": -130.99
+      }
+    }
+  },
+  "gbpusd": {
+    "dev": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 2527,
+        "win_rate": 33.44,
+        "profit_factor": 0.607,
+        "expectancy_pips": -1.91,
+        "net_profit": -6596.51,
+        "max_drawdown_pct": 66.13,
+        "total_return_pct": -65.97
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 3908,
+        "win_rate": 34.9,
+        "profit_factor": 0.681,
+        "expectancy_pips": -1.382,
+        "net_profit": -8138.25,
+        "max_drawdown_pct": 81.7,
+        "total_return_pct": -81.38
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 1413,
+        "win_rate": 35.17,
+        "profit_factor": 0.714,
+        "expectancy_pips": -1.264,
+        "net_profit": -2775.61,
+        "max_drawdown_pct": 28.37,
+        "total_return_pct": -27.76
+      }
+    },
+    "val": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 810,
+        "win_rate": 33.95,
+        "profit_factor": 0.674,
+        "expectancy_pips": -1.297,
+        "net_profit": -1617.29,
+        "max_drawdown_pct": 16.57,
+        "total_return_pct": -16.17
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1338,
+        "win_rate": 34.45,
+        "profit_factor": 0.695,
+        "expectancy_pips": -1.179,
+        "net_profit": -2513.45,
+        "max_drawdown_pct": 25.49,
+        "total_return_pct": -25.13
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 477,
+        "win_rate": 34.8,
+        "profit_factor": 0.763,
+        "expectancy_pips": -0.805,
+        "net_profit": -718.04,
+        "max_drawdown_pct": 9.44,
+        "total_return_pct": -7.18
+      }
+    },
+    "holdout": {
+      "v1_trend_rsi": {
+        "description": "EMA50/200 + RSI pullback (baseline V1)",
+        "trades": 796,
+        "win_rate": 31.03,
+        "profit_factor": 0.58,
+        "expectancy_pips": -1.499,
+        "net_profit": -1750.28,
+        "max_drawdown_pct": 17.5,
+        "total_return_pct": -17.5
+      },
+      "mean_reversion": {
+        "description": "Fade extreme distance from SMA(10)",
+        "trades": 1168,
+        "win_rate": 38.27,
+        "profit_factor": 0.827,
+        "expectancy_pips": -0.149,
+        "net_profit": -991.6,
+        "max_drawdown_pct": 11.18,
+        "total_return_pct": -9.92
+      },
+      "breakout_fade": {
+        "description": "Follow downside breaks, fade upside breaks (CH=160)",
+        "trades": 407,
+        "win_rate": 37.84,
+        "profit_factor": 0.818,
+        "expectancy_pips": -0.292,
+        "net_profit": -403.77,
+        "max_drawdown_pct": 5.43,
+        "total_return_pct": -4.04
+      }
+    }
+  }
+}

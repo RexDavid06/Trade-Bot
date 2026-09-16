@@ -6,8 +6,9 @@ whether the live strategy has a statistical edge **before** any optimization.
 
 ## Requirements
 
-* Python 3.13 venv (already set up in `venv/`)
-* `requirements.txt` packages plus `matplotlib` (already installed)
+* Python 3.13 (pinned via `.python-version` in the repo root)
+* Create the venv if missing: `py -3.13 -m venv venv`
+* Install the pinned packages from `requirements.txt` (includes `matplotlib` and `pytest`)
 
 ## Running the backtest
 

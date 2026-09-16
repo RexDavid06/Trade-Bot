@@ -57,8 +57,9 @@ def _bucketize(v: np.ndarray, nb: int) -> np.ndarray:
     return out
 
 
-def run() -> dict:
-    df = load_m5()
+def run(df: pd.DataFrame | None = None, pip: float = PIP) -> dict:
+    if df is None:
+        df = load_m5()
     close = df["close"].to_numpy(dtype=float)
     n = len(close)
 
@@ -87,7 +88,7 @@ def run() -> dict:
         bucket = _bucketize(recent, MOMENTUM_BUCKETS)
         valid_bucket = bucket >= 0  # exclude warm-up (NaN recent) bars
         # forward move in PIPs
-        fwd_pips = {H: fwd_h / PIP for H, fwd_h in fwd.items()}
+        fwd_pips = {H: fwd_h / pip for H, fwd_h in fwd.items()}
 
         w(f"### Lookback = {LB} candles")
         w("")

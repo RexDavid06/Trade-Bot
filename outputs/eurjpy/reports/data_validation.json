@@ -1,0 +1,112 @@
+{
+  "columns_present": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "expected_columns": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "time_na_count": 0,
+  "first_timestamp": "2025-06-26 03:00:00",
+  "last_timestamp": "2026-09-10 19:05:00",
+  "date_range_days": 441.6701388888889,
+  "timezone_detected": "UTC-naive (no tz info in file); treated as UTC server time",
+  "time_well_formed": true,
+  "duplicate_timestamps": 0,
+  "dominant_bar_minutes": 5,
+  "expected_bar_minutes": 5,
+  "cadence_matches_expected": true,
+  "time_column_sorted": true,
+  "gap_count": 76,
+  "weekend_gap_count": 65,
+  "non_weekend_gap_count": 11,
+  "largest_gap_minutes": 2945.0,
+  "missing_bars_est": 37202,
+  "missing_bars_weekend_only_est": 36912,
+  "missing_bars_non_weekend_est": 290,
+  "ohlc_na": 0,
+  "high_lt_low": 0,
+  "neg_or_zero_ohlc": 0,
+  "close_outside_range": 0,
+  "open_outside_range": 0,
+  "flat_bars_hl_eq_0": 10,
+  "median_bar_range": 0.047000000000025466,
+  "bars_gt_50x_median_range": 0,
+  "spread_present": true,
+  "spread_na": 0,
+  "spread_positive_count": 65704,
+  "spread_zero_count": 24296,
+  "spread_negative_count": 0,
+  "spread_mean_points": 19.63572994033849,
+  "spread_min_points": 1.0,
+  "spread_max_points": 445.0,
+  "spread_zeros_at_tail": 199,
+  "spread_constant_everywhere": false,
+  "spread_zero_by_weekday": {
+    "weekday_0": {
+      "zero": 4929,
+      "total": 18136,
+      "zero_pct": 27.177988531098368
+    },
+    "weekday_1": {
+      "zero": 4859,
+      "total": 18143,
+      "zero_pct": 26.78167888441823
+    },
+    "weekday_2": {
+      "zero": 5050,
+      "total": 18144,
+      "zero_pct": 27.832892416225754
+    },
+    "weekday_3": {
+      "zero": 4803,
+      "total": 17602,
+      "zero_pct": 27.28667196909442
+    },
+    "weekday_4": {
+      "zero": 4655,
+      "total": 17975,
+      "zero_pct": 25.897079276773294
+    },
+    "weekday_5": {
+      "zero": 0,
+      "total": 0,
+      "zero_pct": null
+    },
+    "weekday_6": {
+      "zero": 0,
+      "total": 0,
+      "zero_pct": null
+    }
+  },
+  "spread_nonzero_samples": 65704,
+  "tick_volume_present": true,
+  "real_volume_present": true,
+  "tick_volume_zero_count": 0,
+  "tick_volume_sum": 37545355,
+  "real_volume_zero_count": 90000,
+  "real_volume_sum": 0,
+  "total_rows": 90000,
+  "instrument_issues": [
+    "Spread max 445 pts exceeds threshold 70 pts for EURJPY"
+  ],
+  "instrument": {
+    "symbol": "EURJPY",
+    "pip": 0.01,
+    "point": 0.001,
+    "price_digits": 3
+  }
+}

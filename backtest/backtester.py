@@ -23,14 +23,19 @@ from dataclasses import dataclass
 
 import pandas as pd
 
+from typing import Callable
+
 from .config import CostConfig, StrategyConfig
 from .strategy import BUY, SELL, signal_at
+
+SignalFn = Callable[[pd.DataFrame, int, StrategyConfig], str | None]
 
 
 def _cost_price(df: pd.DataFrame, i: int, cfg: CostConfig) -> float:
     """Round-turn cost (spread + both slippage sides) in price units."""
-    spread_price = float(df["spread"].iat[i]) * cfg.point
-    slippage_price = 2.0 * cfg.slippage_pips * cfg.pip
+    spread_price = float(df["spread"].iat[i]) * cfg.point * cfg.spread_multiplier
+    spread_price = max(spread_price, cfg.min_spread_pips * cfg.pip)
+    slippage_price = 2.0 * (cfg.slippage_pips + cfg.extra_slippage_pips) * cfg.pip
     return spread_price + slippage_price
 
 
@@ -143,6 +148,21 @@ def _exit_at_candle(position: _Position, df: pd.DataFrame, i: int, cfg: CostConf
     return None
 
 
+def classify_result(net_money: float) -> str:
+    """Classify a closed trade as WIN / LOSS / BE from its net money outcome.
+
+    The authoritative classification is the *financial* result (``net_money``),
+    which nets out spread, slippage and commission. The pips-based alternative
+    (``net_pips > 0``) can disagree with the money outcome whenever costs exceed
+    the gross move, so it must not drive the label.
+    """
+    if net_money > 0:
+        return "WIN"
+    if net_money < 0:
+        return "LOSS"
+    return "BE"
+
+
 def _finalize(
     position: _Position,
     entry_time: object,
@@ -162,12 +182,7 @@ def _finalize(
     gross_money = gross_price * notional
     net_money = gross_money - position.cost_price * notional - c_cfg.commission_per_lot * c_cfg.lot_size
 
-    if net_pips > 0:
-        result = "WIN"
-    elif net_pips < 0:
-        result = "LOSS"
-    else:
-        result = "BE"
+    result = classify_result(net_money)
 
     sl_dist_pips = abs(position.entry_price - position.stop_loss) / c_cfg.pip
     r_multiple = net_pips / sl_dist_pips if sl_dist_pips > 0 else 0.0
@@ -210,14 +225,28 @@ def _finalize(
 
 
 def run_backtest(
-    df: pd.DataFrame, s_cfg: StrategyConfig, c_cfg: CostConfig
+    df: pd.DataFrame,
+    s_cfg: StrategyConfig,
+    c_cfg: CostConfig,
+    signal_fn: SignalFn | None = None,
+    max_hold_bars: int | None = None,
 ) -> tuple[list[Trade], pd.DataFrame]:
     """Run the strategy over indicator-augmented `df`.
 
-    Returns (trades, equity_frame). `equity_frame` is a DataFrame of
+    If *signal_fn* is provided it is used instead of the default V1
+    ``strategy.signal_at``.  The signature must be
+    ``signal_fn(df, i, cfg) -> "BUY" | "SELL" | None``.
+
+    If *max_hold_bars* is set, any position still open after that many bars
+    is closed at the close of the candle (exit reason ``"HOLD"``) unless the
+    SL/TP was already touched first on that candle (conservative: stop checked
+    before the horizon exit).
+
+    Returns (trades, equity_frame). ``equity_frame`` is a DataFrame of
     (time, balance) snapshots: the starting balance then the balance after each
     closed trade.
     """
+    _signal = signal_fn if signal_fn is not None else signal_at
     n = len(df)
     trades: list[Trade] = []
     balance = c_cfg.starting_balance
@@ -272,10 +301,24 @@ def run_backtest(
                 trades.append(trade)
                 equity_rows.append({"time": df["time"].iat[i], "balance": balance})
                 position = None
+            elif max_hold_bars is not None and i - position.entry_idx >= max_hold_bars:
+                exit_price = float(df["close"].iat[i])
+                trade = _finalize(
+                    position,
+                    df["time"].iat[position.entry_idx],
+                    df["time"].iat[i],
+                    exit_price,
+                    "HOLD",
+                    c_cfg,
+                )
+                balance += trade.net_money
+                trades.append(trade)
+                equity_rows.append({"time": df["time"].iat[i], "balance": balance})
+                position = None
 
         # 3) Generate a signal on the closed candle i for the next bar (only if flat).
         if position is None:
-            pending_sig = signal_at(df, i, s_cfg)
+            pending_sig = _signal(df, i, s_cfg)
 
     # Close any position still open at the end of the dataset at the last close.
     if position is not None:

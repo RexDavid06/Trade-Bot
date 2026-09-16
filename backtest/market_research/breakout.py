@@ -23,15 +23,16 @@ from ._loader import load_m5, write_json, write_study
 CHANNELS = [20, 40, 80, 160]
 
 
-def run() -> dict:
-    df = load_m5()
+def run(df: pd.DataFrame | None = None, pip: float = PIP) -> dict:
+    if df is None:
+        df = load_m5()
     high = df["high"].to_numpy(dtype=float)
     low = df["low"].to_numpy(dtype=float)
     close = df["close"].to_numpy(dtype=float)
     n = len(close)
 
     fwd = forward_return_matrix(close, HORIZONS)
-    fwd_pips = {H: fh / PIP for H, fh in fwd.items()}
+    fwd_pips = {H: fh / pip for H, fh in fwd.items()}
 
     results = {}
     body_lines = []

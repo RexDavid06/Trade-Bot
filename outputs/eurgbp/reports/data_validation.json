@@ -1,0 +1,112 @@
+{
+  "columns_present": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "expected_columns": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "time_na_count": 0,
+  "first_timestamp": "2021-01-03 22:00:00",
+  "last_timestamp": "2026-09-09 23:55:00",
+  "date_range_days": 2075.0798611111113,
+  "timezone_detected": "UTC-naive (no tz info in file); treated as UTC server time",
+  "time_well_formed": true,
+  "duplicate_timestamps": 0,
+  "dominant_bar_minutes": 5,
+  "expected_bar_minutes": 5,
+  "cadence_matches_expected": true,
+  "time_column_sorted": true,
+  "gap_count": 432,
+  "weekend_gap_count": 298,
+  "non_weekend_gap_count": 134,
+  "largest_gap_minutes": 4325.0,
+  "missing_bars_est": 172147,
+  "missing_bars_weekend_only_est": 171459,
+  "missing_bars_non_weekend_est": 688,
+  "ohlc_na": 0,
+  "high_lt_low": 0,
+  "neg_or_zero_ohlc": 0,
+  "close_outside_range": 17,
+  "open_outside_range": 24,
+  "flat_bars_hl_eq_0": 286,
+  "median_bar_range": 0.00019000000000002348,
+  "bars_gt_50x_median_range": 3,
+  "spread_present": true,
+  "spread_na": 0,
+  "spread_positive_count": 425477,
+  "spread_zero_count": 0,
+  "spread_negative_count": 0,
+  "spread_mean_points": 11.683588067040052,
+  "spread_min_points": 1.0,
+  "spread_max_points": 350.0,
+  "spread_zeros_at_tail": 0,
+  "spread_constant_everywhere": false,
+  "spread_zero_by_weekday": {
+    "weekday_0": {
+      "zero": 0,
+      "total": 85067,
+      "zero_pct": 0.0
+    },
+    "weekday_1": {
+      "zero": 0,
+      "total": 85486,
+      "zero_pct": 0.0
+    },
+    "weekday_2": {
+      "zero": 0,
+      "total": 85031,
+      "zero_pct": 0.0
+    },
+    "weekday_3": {
+      "zero": 0,
+      "total": 84777,
+      "zero_pct": 0.0
+    },
+    "weekday_4": {
+      "zero": 0,
+      "total": 75792,
+      "zero_pct": 0.0
+    },
+    "weekday_5": {
+      "zero": 0,
+      "total": 0,
+      "zero_pct": null
+    },
+    "weekday_6": {
+      "zero": 0,
+      "total": 9324,
+      "zero_pct": 0.0
+    }
+  },
+  "spread_nonzero_samples": 425477,
+  "tick_volume_present": true,
+  "real_volume_present": true,
+  "tick_volume_zero_count": 0,
+  "tick_volume_sum": 178848501370000,
+  "real_volume_zero_count": 425477,
+  "real_volume_sum": 0,
+  "total_rows": 425477,
+  "instrument_issues": [
+    "Spread max 350 pts exceeds threshold 70 pts for EURGBP"
+  ],
+  "instrument": {
+    "symbol": "EURGBP",
+    "pip": 0.0001,
+    "point": 1e-05,
+    "price_digits": 5
+  }
+}

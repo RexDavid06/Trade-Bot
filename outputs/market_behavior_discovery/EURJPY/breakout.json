@@ -1,0 +1,18 @@
+{
+  "CH20": {
+    "high_breakout_bars": 3297,
+    "low_breakout_bars": 2776
+  },
+  "CH40": {
+    "high_breakout_bars": 2281,
+    "low_breakout_bars": 1810
+  },
+  "CH80": {
+    "high_breakout_bars": 1628,
+    "low_breakout_bars": 1142
+  },
+  "CH160": {
+    "high_breakout_bars": 1141,
+    "low_breakout_bars": 735
+  }
+}

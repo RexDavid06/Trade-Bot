@@ -1,2 +1,16 @@
 venv
 meta logins.txt
+
+# --- Reproducibility / hygiene fence (Step 0) ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Raw / intermediate Dukascopy research artifacts. The canonical merged
+# data/<symbol>_m5.csv files stay tracked as versioned evidence.
+data/*-m5-*.csv
+data/*_m5_dukascopy_poc.csv
+data/diag_seq/
+data/poc*/
+data/smoke_*/
+data/temp_range_test/

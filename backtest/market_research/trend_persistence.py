@@ -31,13 +31,14 @@ def _discrete_move(close, wd):
     return out
 
 
-def run() -> dict:
-    df = load_m5()
+def run(df: pd.DataFrame | None = None, pip: float = PIP) -> dict:
+    if df is None:
+        df = load_m5()
     close = df["close"].to_numpy(dtype=float)
     n = len(close)
 
     fwd = forward_return_matrix(close, HORIZONS)
-    fwd_pips = {H: fh / PIP for H, fh in fwd.items()}
+    fwd_pips = {H: fh / pip for H, fh in fwd.items()}
 
     results = {}
     body_lines = []

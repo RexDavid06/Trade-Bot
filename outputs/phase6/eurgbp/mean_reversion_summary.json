@@ -1,0 +1,27 @@
+{
+  "LB10": {
+    "dist_std": 1.2406739951771102,
+    "extreme_below_lt_neg1_pct": 26.05666666666667,
+    "extreme_above_gt_1_pct": 25.509999999999998
+  },
+  "LB20": {
+    "dist_std": 1.3179846541284594,
+    "extreme_below_lt_neg1_pct": 26.612222222222222,
+    "extreme_above_gt_1_pct": 26.13
+  },
+  "LB40": {
+    "dist_std": 1.3637244618327042,
+    "extreme_below_lt_neg1_pct": 26.311111111111114,
+    "extreme_above_gt_1_pct": 25.801111111111112
+  },
+  "LB80": {
+    "dist_std": 1.3967442862748936,
+    "extreme_below_lt_neg1_pct": 25.32888888888889,
+    "extreme_above_gt_1_pct": 25.701111111111114
+  },
+  "LB160": {
+    "dist_std": 1.4419287387621729,
+    "extreme_below_lt_neg1_pct": 24.797777777777778,
+    "extreme_above_gt_1_pct": 25.387777777777774
+  }
+}

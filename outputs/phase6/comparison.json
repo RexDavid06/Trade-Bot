@@ -1,0 +1,142 @@
+{
+  "eurusd": {
+    "bars": 90000,
+    "first": "2025-06-25 22:45:00",
+    "last": "2026-09-10 17:35:00",
+    "studies": {
+      "momentum": {
+        "status": "ok",
+        "time_s": 0.8
+      },
+      "mean_reversion": {
+        "status": "ok",
+        "time_s": 0.7
+      },
+      "breakout": {
+        "status": "ok",
+        "time_s": 0.2
+      },
+      "volatility": {
+        "status": "ok",
+        "time_s": 1.0
+      },
+      "sessions": {
+        "status": "ok",
+        "time_s": 0.6
+      },
+      "trend_persistence": {
+        "status": "ok",
+        "time_s": 0.4
+      },
+      "range_behavior": {
+        "status": "ok",
+        "time_s": 0.6
+      }
+    }
+  },
+  "eurgbp": {
+    "bars": 90000,
+    "first": "2025-06-26 01:20:00",
+    "last": "2026-09-10 17:35:00",
+    "studies": {
+      "momentum": {
+        "status": "ok",
+        "time_s": 0.7
+      },
+      "mean_reversion": {
+        "status": "ok",
+        "time_s": 0.6
+      },
+      "breakout": {
+        "status": "ok",
+        "time_s": 0.2
+      },
+      "volatility": {
+        "status": "ok",
+        "time_s": 1.1
+      },
+      "sessions": {
+        "status": "ok",
+        "time_s": 0.6
+      },
+      "trend_persistence": {
+        "status": "ok",
+        "time_s": 0.4
+      },
+      "range_behavior": {
+        "status": "ok",
+        "time_s": 0.6
+      }
+    }
+  },
+  "eurjpy": {
+    "bars": 90000,
+    "first": "2025-06-26 01:30:00",
+    "last": "2026-09-10 17:35:00",
+    "studies": {
+      "momentum": {
+        "status": "ok",
+        "time_s": 0.7
+      },
+      "mean_reversion": {
+        "status": "ok",
+        "time_s": 0.6
+      },
+      "breakout": {
+        "status": "ok",
+        "time_s": 0.2
+      },
+      "volatility": {
+        "status": "ok",
+        "time_s": 1.0
+      },
+      "sessions": {
+        "status": "ok",
+        "time_s": 0.6
+      },
+      "trend_persistence": {
+        "status": "ok",
+        "time_s": 0.4
+      },
+      "range_behavior": {
+        "status": "ok",
+        "time_s": 0.6
+      }
+    }
+  },
+  "gbpusd": {
+    "bars": 90000,
+    "first": "2025-06-25 23:45:00",
+    "last": "2026-09-10 17:35:00",
+    "studies": {
+      "momentum": {
+        "status": "ok",
+        "time_s": 0.7
+      },
+      "mean_reversion": {
+        "status": "ok",
+        "time_s": 0.7
+      },
+      "breakout": {
+        "status": "ok",
+        "time_s": 0.2
+      },
+      "volatility": {
+        "status": "ok",
+        "time_s": 1.1
+      },
+      "sessions": {
+        "status": "ok",
+        "time_s": 0.6
+      },
+      "trend_persistence": {
+        "status": "ok",
+        "time_s": 0.4
+      },
+      "range_behavior": {
+        "status": "ok",
+        "time_s": 0.6
+      }
+    }
+  }
+}

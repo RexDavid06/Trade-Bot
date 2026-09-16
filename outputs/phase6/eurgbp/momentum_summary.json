@@ -1,0 +1,26 @@
+{
+  "LB3": {
+    "recent_move_pips_med": 0.0,
+    "positive_bars_pct": 48.52
+  },
+  "LB5": {
+    "recent_move_pips_med": 0.0,
+    "positive_bars_pct": 48.57555555555555
+  },
+  "LB10": {
+    "recent_move_pips_med": 0.0,
+    "positive_bars_pct": 48.693333333333335
+  },
+  "LB20": {
+    "recent_move_pips_med": 0.0,
+    "positive_bars_pct": 49.632222222222225
+  },
+  "LB40": {
+    "recent_move_pips_med": 0.0,
+    "positive_bars_pct": 49.836666666666666
+  },
+  "LB80": {
+    "recent_move_pips_med": 9.99999999995449e-06,
+    "positive_bars_pct": 50.312222222222225
+  }
+}

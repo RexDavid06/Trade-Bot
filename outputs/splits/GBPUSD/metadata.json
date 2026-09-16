@@ -1,0 +1,22 @@
+{
+  "symbol": "GBPUSD",
+  "method": "fraction",
+  "fractions": {
+    "dev": 0.6,
+    "val": 0.2,
+    "holdout": 0.2
+  },
+  "counts": {
+    "dev": 224848,
+    "val": 74949,
+    "holdout": 74949
+  },
+  "first": "2021-01-03 22:00:00",
+  "last": "2026-09-09 23:55:00",
+  "date_range_days": 2075.0798611111113,
+  "run_id": "9ed544ca18cb",
+  "dataset_rows": 374746,
+  "holdout_start": "2025-08-08 04:00:00",
+  "holdout_end": "2026-09-09 23:55:00",
+  "holdout_protection": "WARNING: The holdout set must NOT be used for feature selection, hyperparameter tuning, or any model development. It exists solely for final unbiased performance estimation."
+}

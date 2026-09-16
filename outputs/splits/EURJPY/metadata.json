@@ -1,0 +1,22 @@
+{
+  "symbol": "EURJPY",
+  "method": "fraction",
+  "fractions": {
+    "dev": 0.6,
+    "val": 0.2,
+    "holdout": 0.2
+  },
+  "counts": {
+    "dev": 54000,
+    "val": 18000,
+    "holdout": 18000
+  },
+  "first": "2025-06-26 03:00:00",
+  "last": "2026-09-10 19:05:00",
+  "date_range_days": 441.6701388888889,
+  "run_id": "04a63ab8c7aa",
+  "dataset_rows": 90000,
+  "holdout_start": "2026-06-16 07:10:00",
+  "holdout_end": "2026-09-10 19:05:00",
+  "holdout_protection": "WARNING: The holdout set must NOT be used for feature selection, hyperparameter tuning, or any model development. It exists solely for final unbiased performance estimation."
+}

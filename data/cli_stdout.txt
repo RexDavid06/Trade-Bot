@@ -1,0 +1,18 @@
+----------------------------------------------------
+Downloading historical price data for:
+----------------------------------------------------
+Instrument:     Euro vs Pound Sterling
+Timeframe:      m5
+From date:      Jan 1, 2021, 12:00 AM
+To date:        Sep 10, 2026, 12:00 AM
+Price type:     bid
+Volumes:        true
+UTC Offset:     0
+Include flats:  false
+Format:         csv
+----------------------------------------------------
+----------------------------------------------------
+√ File saved: data\temp_range_test\eurgbp-m5-bid-2021-01-01-2026-09-10.csv (22.51 MB)
+
+Download time: 4m 36s
+

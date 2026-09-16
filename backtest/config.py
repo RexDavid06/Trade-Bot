@@ -54,6 +54,12 @@ class CostConfig:
     commission_per_lot: float = 7.0  # USD, round-turn
     slippage_pips: float = 0.5  # per side
 
+    # Observed-spread adjustments (used by the cost-sensitivity framework).
+    # Defaults reproduce the original behavior exactly: raw spread * point.
+    spread_multiplier: float = 1.0  # scales the observed spread column
+    min_spread_pips: float = 0.0  # floor on the observed spread, in pips
+    extra_slippage_pips: float = 0.0  # added slippage per side, on top of slippage_pips
+
     # EURUSD quoting
     point: float = 0.00001  # minimum price increment
     pip: float = 0.0001  # standard pip

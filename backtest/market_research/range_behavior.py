@@ -53,8 +53,9 @@ def _bucketize(v: np.ndarray, nb: int) -> np.ndarray:
     return out
 
 
-def run() -> dict:
-    df = load_m5()
+def run(df: pd.DataFrame | None = None, pip: float = PIP) -> dict:
+    if df is None:
+        df = load_m5()
     high = df["high"].to_numpy(dtype=float)
     low = df["low"].to_numpy(dtype=float)
     close = df["close"].to_numpy(dtype=float)
@@ -65,8 +66,8 @@ def run() -> dict:
         .ewm(alpha=1 / ATR_PERIOD, adjust=False, min_periods=ATR_PERIOD).mean().to_numpy()
 
     fwd = forward_return_matrix(close, HORIZONS)
-    fwd_pips = {H: fh / PIP for H, fh in fwd.items()}
-    fwd_abs = {H: np.abs(fh) / PIP for H, fh in fwd.items()}
+    fwd_pips = {H: fh / pip for H, fh in fwd.items()}
+    fwd_abs = {H: np.abs(fh) / pip for H, fh in fwd.items()}
 
     results = {}
     body_lines = []

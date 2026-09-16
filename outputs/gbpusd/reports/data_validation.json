@@ -1,0 +1,113 @@
+{
+  "columns_present": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "expected_columns": [
+    "time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tick_volume",
+    "spread",
+    "real_volume"
+  ],
+  "time_na_count": 0,
+  "first_timestamp": "2021-01-03 22:00:00",
+  "last_timestamp": "2026-09-09 23:55:00",
+  "date_range_days": 2075.0798611111113,
+  "timezone_detected": "UTC-naive (no tz info in file); treated as UTC server time",
+  "time_well_formed": true,
+  "duplicate_timestamps": 0,
+  "dominant_bar_minutes": 5,
+  "expected_bar_minutes": 5,
+  "cadence_matches_expected": true,
+  "time_column_sorted": true,
+  "gap_count": 494,
+  "weekend_gap_count": 414,
+  "non_weekend_gap_count": 80,
+  "largest_gap_minutes": 5765.0,
+  "missing_bars_est": 222878,
+  "missing_bars_weekend_only_est": 222418,
+  "missing_bars_non_weekend_est": 460,
+  "ohlc_na": 0,
+  "high_lt_low": 2,
+  "neg_or_zero_ohlc": 0,
+  "close_outside_range": 36,
+  "open_outside_range": 23,
+  "flat_bars_hl_eq_0": 449,
+  "median_bar_range": 0.00039999999999995595,
+  "bars_gt_50x_median_range": 2,
+  "spread_present": true,
+  "spread_na": 0,
+  "spread_positive_count": 374746,
+  "spread_zero_count": 0,
+  "spread_negative_count": 0,
+  "spread_mean_points": 11.408834250398938,
+  "spread_min_points": 1.0,
+  "spread_max_points": 382.0,
+  "spread_zeros_at_tail": 0,
+  "spread_constant_everywhere": false,
+  "spread_zero_by_weekday": {
+    "weekday_0": {
+      "zero": 0,
+      "total": 74308,
+      "zero_pct": 0.0
+    },
+    "weekday_1": {
+      "zero": 0,
+      "total": 74553,
+      "zero_pct": 0.0
+    },
+    "weekday_2": {
+      "zero": 0,
+      "total": 74965,
+      "zero_pct": 0.0
+    },
+    "weekday_3": {
+      "zero": 0,
+      "total": 75849,
+      "zero_pct": 0.0
+    },
+    "weekday_4": {
+      "zero": 0,
+      "total": 66864,
+      "zero_pct": 0.0
+    },
+    "weekday_5": {
+      "zero": 0,
+      "total": 0,
+      "zero_pct": null
+    },
+    "weekday_6": {
+      "zero": 0,
+      "total": 8207,
+      "zero_pct": 0.0
+    }
+  },
+  "spread_nonzero_samples": 374746,
+  "tick_volume_present": true,
+  "real_volume_present": true,
+  "tick_volume_zero_count": 0,
+  "tick_volume_sum": 169040179105900,
+  "real_volume_zero_count": 374746,
+  "real_volume_sum": 0,
+  "total_rows": 374746,
+  "instrument_issues": [
+    "Spread max 382 pts exceeds threshold 60 pts for GBPUSD",
+    "Price range [1.0400, 1.4246] outside expected [1.1, 1.6]"
+  ],
+  "instrument": {
+    "symbol": "GBPUSD",
+    "pip": 0.0001,
+    "point": 1e-05,
+    "price_digits": 5
+  }
+}

@@ -7,7 +7,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .backtester import Trade
+from .backtester import Trade, classify_result
 
 
 def _money(trades: list[Trade]) -> np.ndarray:
@@ -17,8 +17,8 @@ def _money(trades: list[Trade]) -> np.ndarray:
 def compute_metrics(trades: list[Trade], equity: pd.DataFrame, starting_balance: float) -> dict[str, Any]:
     money = _money(trades)
     total = len(trades)
-    wins = [t for t in trades if t.result == "WIN"]
-    losses = [t for t in trades if t.result == "LOSS"]
+    wins = [t for t in trades if classify_result(t.net_money) == "WIN"]
+    losses = [t for t in trades if classify_result(t.net_money) == "LOSS"]
     win_count = len(wins)
     loss_count = len(losses)
     be_count = total - win_count - loss_count
@@ -39,12 +39,13 @@ def compute_metrics(trades: list[Trade], equity: pd.DataFrame, starting_balance:
     expectancy = net_profit / total if total else 0.0
     total_return = net_profit / starting_balance
 
-    # Streaks based on WIN/LOSS/BE sign.
+    # Streaks based on net-money classification (WIN/LOSS/BE).
     streaks, cur_streak = [], 0
     for t in trades:
-        if t.result == "WIN":
+        label = classify_result(t.net_money)
+        if label == "WIN":
             cur_streak = cur_streak + 1 if cur_streak > 0 else 1
-        elif t.result == "LOSS":
+        elif label == "LOSS":
             cur_streak = cur_streak - 1 if cur_streak < 0 else -1
         else:  # BE breaks the streak
             cur_streak = 0
@@ -101,7 +102,7 @@ def compute_metrics(trades: list[Trade], equity: pd.DataFrame, starting_balance:
 def build_monthly_table(trades: list[Trade]) -> pd.DataFrame:
     rows = []
     for t in trades:
-        rows.append({"month": str(pd.Timestamp(t.exit_time).to_period("M")), "net_pips": t.net_pips, "net_money": t.net_money, "result": t.result})
+        rows.append({"month": str(pd.Timestamp(t.exit_time).to_period("M")), "net_pips": t.net_pips, "net_money": t.net_money, "result": classify_result(t.net_money)})
     if not rows:
         return pd.DataFrame()
     month = pd.DataFrame(rows).groupby("month").agg(

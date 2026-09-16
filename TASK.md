@@ -1,654 +1,401 @@
-# TRADE BOT — PHASE 5: STRATEGY BENCHMARKING
+PHASE 5 — BROKER-ACCURATE DATA + MARKET EXPANSION
 
-We are now moving from market-behavior research into **Phase 5: Strategy Benchmarking**.
+OBJECTIVE
 
-The goal is NOT to find the best-looking backtest through optimization.
+Phase 3 and Phase 4 both failed to identify an economically viable forex behavior.
 
-The goal is to take the strongest market behaviors discovered in Phases 1–4 and test whether they can be converted into **simple, defensible, executable trading strategies that survive realistic costs**.
+Phase 3:
+- M5 behavior did not clear realistic costs.
+- Best movement-to-cost ratio: 0.66.
 
-## IMPORTANT PROJECT RULES
-
-Before doing anything:
-
-1. Inspect the existing project structure.
-2. Read:
-
-   * `MARKET_RESEARCH_REPORT.md`
-   * `BACKTEST.md`
-   * `TASK.md`
-   * existing files under `backtest/market_research/`
-   * existing data validation/split modules
-   * existing backtesting infrastructure.
-3. Do NOT modify:
-
-   * `bot.py`
-   * V1 strategy files
-   * V2 strategy files
-   * V1/V2 validation logic
-   * existing market-research results.
-4. V1 and V2 are research artifacts and must remain reproducible.
-5. Do not optimize parameters.
-6. Do not perform parameter sweeps.
-7. Do not combine multiple strategies.
-8. Do not use the holdout set to make strategy decisions.
-9. Every signal must be causal.
-10. Every execution assumption must be explicitly documented.
-
----
-
-# 1. DATA FOUNDATION
-
-Use the existing chronological split:
-
-* Development: first 60%
-* Validation: next 20%
-* Holdout: final 20%
-
-Do not shuffle data.
-
-The current dataset is approximately:
-
-* 90,000 EURUSD M5 bars
-* approximately 15 months
-* June 2025 → September 2026
-
-Treat this dataset as **preliminary**, not as the final research foundation.
-
-The historical spread field is known to be unreliable:
-
-* approximately 46% of candles have zero spread
-* the final ~200 candles have zero spread
+Phase 4:
+- 1h–24h multi-hour behavior also did not clear costs.
+- Best movement-to-cost ratio: 0.73.
+- No behavior was classified as potentially viable.
 
 Therefore:
 
-### DO NOT use the historical spread column as the actual execution spread.
+DO NOT create another M5 strategy.
+DO NOT create Strategy 04.
+DO NOT tune Strategies 01–03.
+DO NOT modify bot.py.
+DO NOT optimize parameters.
 
-Instead create a configurable synthetic cost model.
+The purpose of Phase 5 is to determine whether the problem is:
 
-Baseline:
+A. inadequate/overestimated historical cost data,
+B. timeframe construction,
+C. the selected FX pairs,
+D. or the FX market itself.
 
-* spread = 0.5 pip
-* slippage = 0.5 pip per side
-* commission = $7 per lot round turn
+The ultimate project goal remains:
 
-Also run cost-stress scenarios:
+FIND ONE CREDIBLE EDGE → VALIDATE IT → CONNECT IT TO MT5 DEMO.
 
-* 0.5 pip spread
-* 0.75 pip spread
-* 1.0 pip spread
+This phase must move us toward that goal without unnecessary infrastructure work.
 
-Keep slippage and commission constant unless there is a strong technical reason to expose them as configuration.
+==================================================
+PHASE 5A — AUDIT CURRENT DATA/COST MODEL
+==================================================
 
-Document this clearly.
+Before obtaining anything new, inspect the existing project and document:
 
----
+1. What historical price data is currently available.
+2. Which files contain bid/ask/spread information.
+3. How spread is represented.
+4. How transaction costs are currently modeled.
+5. What slippage/commission assumptions are used.
+6. Whether the historical spread represents actual broker conditions.
+7. Which broker/account the current MT5 bot is configured to use.
+8. Whether historical data can realistically represent that broker's execution environment.
 
-# 2. BUILD A COMMON STRATEGY BENCHMARK FRAMEWORK
+Do NOT modify the existing strategy engine merely to perform this audit.
 
-Create a clean reusable framework for strategy experiments.
+==================================================
+PHASE 5B — BROKER-ACCURATE DATA
+==================================================
 
-Suggested structure:
+We eventually need historical data that is as close as practical to the broker/account that will be used for demo trading.
 
-```text
-backtest/
-    strategies/
-        __init__.py
-        mean_reversion.py
-        upside_breakout_fade.py
-        downside_breakout_continuation.py
+First inspect the repository and local machine for existing MT5/exported historical data.
 
-    benchmark/
-        __init__.py
-        engine.py
-        execution.py
-        costs.py
-        metrics.py
-        reporting.py
-        run.py
-        validate.py
-```
+Look for:
 
-Adapt the structure to the existing project rather than unnecessarily duplicating existing functionality.
+- MT5 history
+- CSV exports
+- tick data
+- bid/ask data
+- broker-specific data
+- existing data download utilities
+- symbol specifications
+- contract specifications
 
-The framework should separate:
+Do NOT download random historical data from an arbitrary source merely to produce another backtest.
 
-### A. Signal generation
+If broker-accurate historical bid/ask data is NOT already available locally:
 
-"What does the market tell us?"
+STOP the implementation portion and clearly report:
 
-from:
+- what is missing
+- what exact data is required
+- what format the data should have
+- how much history is needed
+- which symbols/timeframes are needed
+- what broker information is needed
 
-### B. Execution
+Do not fabricate broker data.
 
-"How much would we actually make or lose after spread, slippage and commission?"
+==================================================
+PHASE 5C — TIMEFRAME CONSTRUCTION
+==================================================
 
-This distinction is important.
+If suitable underlying data exists, construct/verify:
 
----
+- M5
+- M15
+- H1
+- H4
 
-# 3. STRATEGY A — MEAN REVERSION
+from the same underlying source where possible.
 
-Research showed that extreme deviation from a recent mean was followed by mild reversion.
+Important:
 
-This is currently the strongest candidate from the market research.
+Do NOT independently source different datasets for each timeframe.
 
-Use a **causal standardized distance from a trailing mean**.
+Where tick or bid/ask data exists, preserve:
 
-Conceptually:
+- timestamp
+- bid
+- ask
+- spread
+- OHLC construction rules
 
-```text
-distance = (close - trailing_mean) / trailing_std
-```
+Document timezone/session assumptions.
 
-No future data may influence the mean or standard deviation.
+Ensure bars are constructed without lookahead.
 
-Use a simple, conventional extreme-deviation rule.
+==================================================
+PHASE 5D — COST REALISM
+==================================================
 
-Initial hypothesis:
+Determine the actual trading economics for the intended MT5 demo account.
 
-### LONG
+Document:
 
-When price is sufficiently below the trailing mean:
+- typical spread
+- commission
+- minimum lot
+- lot step
+- contract size
+- stop distance restrictions
+- execution/filling constraints
+- trading hours
+- symbol specifications
 
-```text
-distance <= -2.0
-```
+Do not guess values.
 
-generate a LONG signal.
+If exact values cannot be obtained from the repository or broker configuration, clearly mark them UNKNOWN.
 
-### SHORT
+Do not silently substitute generic values.
 
-When:
+==================================================
+PHASE 5E — RECHECK EXISTING MARKET BEHAVIORS
+==================================================
 
-```text
-distance >= +2.0
-```
+ONLY after reliable data/cost information is available:
 
-generate a SHORT signal.
+Re-test the existing broad market behaviors that were already identified in Phases 3 and 4.
 
-Signal is generated using a CLOSED candle.
+Do NOT create new strategies.
 
-Entry occurs at the NEXT candle's open.
+Investigate only:
 
-Do not use the current candle's future information.
+1. directional persistence
+2. multi-hour reversal
+3. session-open behavior
+4. volatility expansion
+5. breakout continuation/failure
+6. movement-to-cost
 
----
+Use a small number of economically motivated horizons.
 
-## Mean-reversion exit
+Do not perform a parameter sweep.
 
-Do NOT blindly reuse V1's 3 ATR target.
+The purpose is NOT to find a profitable backtest.
 
-The strategy is specifically testing reversion toward the mean.
+The purpose is to determine whether improved data/cost modeling materially changes the economic conclusion.
+
+==================================================
+PHASE 5F — MARKET EXPANSION DECISION
+==================================================
+
+If broker-accurate FX data STILL shows no economically viable behavior:
+
+DO NOT continue searching endlessly through EURUSD/EURGBP/GBPUSD.
+
+Expand the research universe.
+
+Investigate a SMALL, predefined set of liquid instruments available through the intended MT5 broker.
+
+Before researching them, inspect broker availability/specifications if possible.
+
+Potential categories may include:
+
+- major FX pairs not previously studied
+- selected indices
+- selected commodities
+- selected liquid CFDs
+
+Do NOT automatically assume any instrument is better.
+
+Do NOT search hundreds of symbols.
+
+Create a small, economically justified universe.
+
+For every candidate instrument measure:
+
+- available history
+- spread/cost burden
+- typical movement
+- volatility
+- movement-to-cost
+- basic directional persistence
+- basic reversal behavior
+- session behavior where applicable
+
+The central question remains:
+
+"Does this market have enough movement relative to realistic trading costs to justify strategy construction?"
+
+==================================================
+PHASE 5G — ECONOMIC VIABILITY GATE
+==================================================
+
+Use the existing research philosophy.
+
+A behavior is NOT interesting merely because:
+
+- it has a positive average,
+- it has statistical significance,
+- it looks profitable before costs,
+- or it works in one period.
+
+The behavior must have enough movement to plausibly survive realistic transaction costs.
 
 Use:
 
-### Take profit
+movement-to-cost ratio = expected gross movement / realistic round-trip cost
 
-Trailing mean at the time of the signal.
+Classify findings as:
 
-### Stop loss
+1. ECONOMICALLY INSUFFICIENT
+2. BORDERLINE
+3. POTENTIALLY VIABLE
 
-1.5 × ATR.
+Do not invent arbitrary thresholds.
 
-### Maximum holding period
+Use the project's existing viability logic and explain it.
 
-Use a fixed, clearly documented holding limit so trades cannot remain open indefinitely.
+==================================================
+PHASE 5H — IF A VIABLE BEHAVIOR IS FOUND
+==================================================
 
-Choose a reasonable conventional value and document the rationale.
+If and ONLY IF a behavior clearly reaches the project's viability bar:
 
-Do NOT optimize this value.
+DO NOT immediately implement it.
 
-If the existing framework already has a clean maximum-holding-period implementation, reuse it.
+Produce a candidate specification containing:
 
----
+- instrument
+- timeframe
+- signal concept
+- entry timing
+- exit concept
+- expected movement
+- estimated realistic cost
+- movement-to-cost ratio
+- sample size
+- development period
+- known failure conditions
+- data limitations
+- reasons it deserves formal strategy validation
 
-# 4. STRATEGY B — UPSIDE BREAKOUT FADE
+Then STOP.
 
-Market research found that upside breakouts were followed by negative forward returns during this sample.
+Do not create Strategy 04 yet.
 
-Test the hypothesis:
+Do not touch bot.py.
 
-> A break above a recent high tends to fail rather than continue.
+We will review the candidate before implementation.
 
-Use a simple causal breakout definition.
+==================================================
+PHASE 5I — IF NOTHING IS VIABLE
+==================================================
 
-Initial benchmark:
+If nothing clears the viability bar:
 
-```text
-previous_high = highest high of the previous N completed candles
-```
+DO NOT invent another strategy.
 
-Use one fixed conventional short-term breakout window.
+Instead give a clear decision among:
 
-Do NOT test multiple N values.
+A. obtain better broker/tick/spread data
+B. investigate another timeframe
+C. investigate another instrument class
+D. change broker/data source
+E. reconsider the premise of this trading bot project
 
-Choose a single value, document why it was chosen, and freeze it.
+Explain which limitation is currently preventing credible strategy construction.
 
-Signal:
+==================================================
+STRICT PROTECTION RULES
+==================================================
 
-```text
-current high > previous_high
-AND
-current close < previous_high
-```
+DO NOT MODIFY:
 
-This represents a failed upside breakout / rejection.
+- bot.py
+- V1
+- V2
+- Strategy 01
+- Strategy 02
+- Strategy 03
 
-Generate:
+DO NOT:
 
-```text
-SHORT
-```
+- read validation data
+- read holdout data
+- change the 60/20/20 split
+- optimize parameters
+- run large parameter sweeps
+- tune thresholds repeatedly
+- create Strategy 04
+- alter frozen historical outputs
+- fabricate broker data
+- fabricate spread data
+- fabricate commission data
+- use lookahead
+- use future information
+- select results because they look profitable
 
-on the signal candle close.
+Research code may be added under:
 
-Enter at next candle open.
+backtest/market_research/
 
-### Exit
+Outputs may be written under:
 
-Use a simple ATR-based risk model:
+outputs/
 
-* SL = 1.5 × ATR
-* TP = 3 × ATR
+==================================================
+OUTPUT
+==================================================
 
-Do not optimize these values.
+Create:
 
----
+PHASE_5_BROKER_DATA_AND_MARKET_EXPANSION.md
 
-# 5. STRATEGY C — DOWNSIDE BREAKOUT CONTINUATION
+If research code is required:
 
-Market research found that downside breaks were followed by positive forward returns.
+backtest/market_research/
 
-Because the direction is DOWN, test:
+If structured results are required:
 
-> A downside breakout may continue lower.
+outputs/phase_5_market_research.json
 
-Use the same fixed breakout window chosen for Strategy B.
+The report must contain:
 
-Signal:
+1. Objective
+2. Current data audit
+3. Current cost-model audit
+4. Broker/account execution requirements
+5. Available historical data
+6. Missing data
+7. Timeframe construction assessment
+8. Broker-accurate cost assessment
+9. Existing FX behavior re-check
+10. Market expansion universe
+11. Instrument-level findings
+12. Movement-to-cost analysis
+13. Economically insufficient behaviors
+14. Borderline behaviors
+15. Potentially viable behaviors
+16. Exact evidence for any candidate
+17. Limitations
+18. Final decision
+19. Recommended next action
 
-```text
-current low < previous_low
-AND
-current close < previous_low
-```
+==================================================
+TESTS
+==================================================
 
-Generate:
+If research code is added:
 
-```text
-SHORT
-```
+Run the existing test suite.
 
-Enter at the next candle open.
+Expected existing baseline:
 
-### Exit
+74 tests passing.
 
-Use:
+Do not modify tests simply to make them pass.
 
-* SL = 1.5 × ATR
-* TP = 3 × ATR
+==================================================
+STOP CONDITION
+==================================================
 
-Do not optimize.
+STOP after producing:
 
----
+PHASE_5_BROKER_DATA_AND_MARKET_EXPANSION.md
 
-# 6. POSITION RULES
+Do not implement any trading strategy.
 
-For all three strategies:
+Do not modify bot.py.
 
-* one position at a time
-* no overlapping positions
-* no pyramiding
-* no martingale
-* no averaging down
-* no dynamic position sizing during the initial benchmark
-* fixed 0.10 lot for comparability with previous research
-* signal on closed candle
-* next-candle-open execution
+Do not connect to MT5.
 
-Keep the benchmark focused on strategy behavior rather than money management.
+Do not start demo trading yet.
 
----
+Report exactly what was discovered and what the next concrete action should be.
 
-# 7. COST MODEL
+The goal is no longer "perform more research."
 
-Every strategy must be tested with realistic synthetic transaction costs.
+The goal is:
 
-At minimum report:
-
-### Gross / theoretical
-
-No trading costs.
-
-### Baseline
-
-```text
-spread = 0.5 pip
-slippage = 0.5 pip per side
-commission = $7/lot round turn
-```
-
-### Stress 1
-
-```text
-spread = 0.75 pip
-```
-
-### Stress 2
-
-```text
-spread = 1.0 pip
-```
-
-The cost model must be centralized and configurable.
-
-Do not bury cost assumptions inside strategy code.
-
----
-
-# 8. DEVELOPMENT → VALIDATION → HOLDOUT
-
-This is extremely important.
-
-Initially run all three strategies on the DEVELOPMENT dataset.
-
-Do NOT use the holdout to choose rules.
-
-For each strategy:
-
-```text
-Development
-     ↓
-Does the hypothesis show promise?
-     ↓
-Validation
-     ↓
-Does it survive?
-     ↓
-Holdout
-```
-
-The holdout is the final untouched test.
-
-If a strategy performs badly on development:
-
-DO NOT modify it just to make it profitable.
-
-Record the failure.
-
----
-
-# 9. REQUIRED METRICS
-
-For every strategy and every cost scenario calculate:
-
-### Trade statistics
-
-* number of trades
-* win rate
-* average win
-* average loss
-* reward/risk
-* expectancy in R
-* expectancy in money
-* profit factor
-
-### Risk
-
-* maximum drawdown
-* maximum drawdown %
-* longest losing streak
-* longest winning streak
-
-### Performance
-
-* total gross P/L
-* total net P/L
-* return %
-* average trade
-* average duration
-
-### Direction
-
-* long performance
-* short performance
-
-### Time
-
-* session performance
-* monthly performance
-* yearly performance where enough data exists
-
-### Cost sensitivity
-
-Clearly show:
-
-```text
-0 cost
-0.5 pip spread
-0.75 pip spread
-1.0 pip spread
-```
-
-This is critical.
-
-We need to know whether an apparent market behavior survives transaction costs.
-
----
-
-# 10. SEPARATE PREDICTIVE EDGE FROM EXECUTION EDGE
-
-For each strategy, report two layers.
-
-## Layer 1 — Market behavior
-
-Before transaction costs:
-
-* average forward return
-* directional hit rate
-* average R
-* distribution of outcomes
-
-This answers:
-
-> Does the market behavior actually exist?
-
-## Layer 2 — Tradable strategy
-
-After:
-
-* spread
-* slippage
-* commission
-
-This answers:
-
-> Can the behavior actually be traded?
-
-Do not confuse these two.
-
-A behavior that produces +0.15 pip before costs but -0.8 pip after costs should be classified as:
-
-```text
-Observed behavior but not currently tradable.
-```
-
----
-
-# 11. DATA QUALITY / LOOKAHEAD VALIDATION
-
-Create validation checks for Phase 5.
-
-At minimum verify:
-
-### Determinism
-
-Same data → same signals and trades.
-
-### No lookahead
-
-Signals may only use information available at or before the signal candle.
-
-### Next-open execution
-
-A signal generated at candle T cannot execute using candle T close as the entry price.
-
-### No overlapping positions
-
-### Correct SL/TP
-
-### Correct cost application
-
-### Correct chronological split
-
-### No holdout contamination
-
-### Maximum holding period correctness
-
-If possible, create a test that modifies future candles after a signal and confirms the signal itself does not change.
-
----
-
-# 12. REPORTING
-
-Create a clear report such as:
-
-```text
-PHASE_5_STRATEGY_BENCHMARK_REPORT.md
-```
-
-Also save machine-readable results to:
-
-```text
-outputs/strategy_benchmarks/
-```
-
-Suggested files:
-
-```text
-mean_reversion.csv
-upside_breakout_fade.csv
-downside_breakout_continuation.csv
-summary.csv
-cost_sensitivity.csv
-monthly_results.csv
-validation_results.csv
-```
-
-Use the project's existing output conventions where appropriate.
-
----
-
-# 13. FINAL CLASSIFICATION
-
-Each strategy must receive a research classification.
-
-Use categories such as:
-
-### FAILED
-
-No meaningful edge or clearly negative after realistic costs.
-
-### INTERESTING BUT NOT TRADABLE
-
-Some market behavior exists, but realistic costs destroy the advantage.
-
-### PROMISING
-
-Positive development and validation evidence with reasonable trade count and acceptable drawdown.
-
-### HOLDOUT VALIDATED
-
-Only use this classification if the strategy survives the untouched holdout without changing the rules after seeing it.
-
-Do not call anything "profitable strategy" merely because one backtest run is positive.
-
----
-
-# 14. DO NOT OPTIMIZE
-
-This phase is a BENCHMARK.
-
-Absolutely do NOT:
-
-* sweep parameters
-* optimize ATR multipliers
-* optimize RSI
-* optimize breakout windows
-* optimize holding periods
-* optimize sessions
-* optimize spread assumptions
-* optimize entry thresholds
-* select the best combination
-* combine strategies
-* reverse losing strategies automatically
-* create filters solely because they improve development results
-
-If a strategy fails, report the failure.
-
-That is useful research.
-
----
-
-# 15. DO NOT CREATE V3 OR MODIFY LIVE CODE
-
-Do not create or modify the live trading bot.
-
-Do not modify:
-
-```text
-bot.py
-```
-
-Do not modify V1.
-
-Do not modify V2.
-
-Do not connect any Phase 5 strategy to MT5 execution.
-
-This phase is research only.
-
----
-
-# 16. RUN THE RESEARCH
-
-After implementation:
-
-1. Run validation.
-2. Run all three strategies on development.
-3. Run validation for strategies that meet clearly pre-defined advancement criteria.
-4. Run holdout only for strategies that legitimately survive development + validation.
-5. Generate the final report.
-6. Check that all outputs are deterministic.
-7. Check git diff carefully.
-
-Do not silently change strategy rules because of results.
-
----
-
-# 17. FINAL RESPONSE TO ME
-
-When finished, report:
-
-1. Files created/modified.
-2. Validation status.
-3. Exact frozen rules for each strategy.
-4. Development results.
-5. Validation results.
-6. Holdout results, if legitimately reached.
-7. Cost sensitivity.
-8. Which hypotheses survived and which failed.
-9. Whether any strategy deserves Phase 6.
-10. Any data-quality limitation that prevents a strong conclusion.
-
-Most importantly:
-
-**Do not tell me that a strategy is good simply because it made money.**
-
-Judge the evidence statistically and conservatively.
-
-The purpose of this phase is to determine whether the market behaviors discovered in Phase 1–4 can actually become robust trading strategies.
-
-If none survive, say so clearly.
-
-That is a successful research outcome.
+FIND WHETHER THERE IS A CREDIBLE MARKET/BEHAVIOR WORTH TURNING INTO THE FIRST DEMO STRATEGY.

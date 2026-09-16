@@ -40,8 +40,9 @@ def _true_range(high, low, prev_close):
     return tr
 
 
-def run() -> dict:
-    df = load_m5()
+def run(df: pd.DataFrame | None = None, pip: float = PIP) -> dict:
+    if df is None:
+        df = load_m5()
     high = df["high"].to_numpy(dtype=float)
     low = df["low"].to_numpy(dtype=float)
     close = df["close"].to_numpy(dtype=float)
@@ -53,8 +54,8 @@ def run() -> dict:
     regime = atr_regime(atr, REGIME_ATR_LOOKBACK)
 
     fwd = forward_return_matrix(close, HORIZONS)
-    fwd_pips = {H: fh / PIP for H, fh in fwd.items()}
-    fwd_abs_pips = {H: np.abs(fh) / PIP for H, fh in fwd.items()}
+    fwd_pips = {H: fh / pip for H, fh in fwd.items()}
+    fwd_abs_pips = {H: np.abs(fh) / pip for H, fh in fwd.items()}
 
     results = {}
     body_lines = []
@@ -106,9 +107,9 @@ def run() -> dict:
         w(f"| {rg} | {cnt[rg]} | {cnt[rg] / total * 100:.1f} |")
     w("")
     results["regime_freq"] = {k: int(v) for k, v in cnt.items()}
-    results["atr_median_pips"] = float(np.nanmedian(atr) / PIP)
-    results["atr_p10_pips"] = float(np.nanpercentile(atr, 10) / PIP)
-    results["atr_p90_pips"] = float(np.nanpercentile(atr, 90) / PIP)
+    results["atr_median_pips"] = float(np.nanmedian(atr) / pip)
+    results["atr_p10_pips"] = float(np.nanpercentile(atr, 10) / pip)
+    results["atr_p90_pips"] = float(np.nanpercentile(atr, 90) / pip)
 
     return {"md": "\n".join(body_lines), "results": results}
 
