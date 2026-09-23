@@ -44,8 +44,10 @@ class CostConfig:
 
     Prices in the CSV are treated as bid prices. Spread and slippage are applied
     as a round-turn cost in price units. Commission is a fixed USD amount per lot
-    (round-turn). Money P&L uses a fixed lot size (the live bot sizes by 1% risk,
-    which depends on a live broker balance and is intentionally not replicated).
+    (round-turn). Money P&L by default uses a fixed lot size; ``lot_size_mode =
+    "risk_fraction"`` optionally re-derives the lot per trade from the running
+    balance using the live bot's nominal formula (see ``lot_for_balance``),
+    without changing the frozen ``"fixed"`` default.
     """
 
     starting_balance: float = 10_000.0
@@ -53,6 +55,22 @@ class CostConfig:
     base_contract: int = 100_000  # 1 standard lot = 100,000 base currency
     commission_per_lot: float = 7.0  # USD, round-turn
     slippage_pips: float = 0.5  # per side
+
+    # Position sizing model (A5). "fixed" (default) applies lot_size to every
+    # trade and reproduces all existing frozen backtests exactly. "risk_fraction"
+    # resolves the lot per trade from the CURRENT running balance:
+    #   lot = balance * (risk_percent/100) / (assumed_sl_pips_for_lot * pip_value_per_lot)
+    # then normalized to lot_round steps, floored at min_lot and capped at
+    # maximum_lot. Defaults reproduce bot.py's live sizing:
+    #   lot = max(round(balance * 0.01 / 1000, 2), 0.01)
+    #   1000 = assumed_sl_pips_for_lot (100) * pip_value_per_lot ($10/pip/lot).
+    lot_size_mode: str = "fixed"
+    risk_percent: float = 1.0
+    assumed_sl_pips_for_lot: float = 100.0
+    pip_value_per_lot: float = 10.0  # USD per pip per standard lot (EURUSD)
+    min_lot: float = 0.01
+    lot_round: float = 0.01
+    maximum_lot: float = 100.0  # broker safety cap (large, effectively unlimited)
 
     # Observed-spread adjustments (used by the cost-sensitivity framework).
     # Defaults reproduce the original behavior exactly: raw spread * point.
@@ -67,6 +85,30 @@ class CostConfig:
     # Conservative intrabar rule: if a single candle would touch both SL and TP,
     # assume the stop-loss was hit first (worst case, avoids optimistic bias).
     conservative_intrabar: bool = True
+
+
+def lot_for_balance(balance: float, cfg: CostConfig) -> float:
+    """Resolve the position lot size for a given running balance.
+
+    * ``lot_size_mode == "fixed"``: return ``cfg.lot_size`` unchanged (the
+      frozen default; this is what every historical backtest used).
+    * ``lot_size_mode == "risk_fraction"``: reproduce the live bot's nominal
+      formula ``max(round(balance * risk_percent/100 / 1000, 2), 0.01)`` using
+      explicit parameters (divisor = assumed_sl_pips_for_lot * pip_value_per_lot
+      = 100 pips * $10 = 1000 by default), then normalize to ``lot_round``
+      steps, floor at ``min_lot`` and cap at ``maximum_lot``.
+    """
+    if cfg.lot_size_mode != "risk_fraction":
+        return cfg.lot_size
+
+    risk_amount = balance * (cfg.risk_percent / 100.0)
+    divisor_per_lot = cfg.assumed_sl_pips_for_lot * cfg.pip_value_per_lot
+    lot = risk_amount / divisor_per_lot if divisor_per_lot > 0 else 0.0
+
+    lot = round(lot / cfg.lot_round) * cfg.lot_round
+    lot = max(lot, cfg.min_lot)
+    lot = min(lot, cfg.maximum_lot)
+    return lot
 
 
 @dataclass(frozen=True)

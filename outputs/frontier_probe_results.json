@@ -1,0 +1,1165 @@
+{
+  "meta": {
+    "phase": "frontier_probe",
+    "data": "dev split clean Dukascopy M5",
+    "cost_model": "entry+exit observed spread + 1.0 pip slippage",
+    "screen": "edge_discovery pre-registered screen",
+    "excluded": {
+      "EURJPY": "degraded"
+    }
+  },
+  "results": {
+    "G-DAYGAP": {
+      "experiment": {
+        "id": "G-DAYGAP",
+        "name": "overnight/weekend gap continuation",
+        "hypothesis": "I - event/context (large gaps)",
+        "tf": "M5",
+        "holds": [
+          6,
+          24
+        ],
+        "rationale": "Gap behavior is explicitly untested in the audit; direction = gap sign."
+      },
+      "symbols": {
+        "EURUSD": {
+          "mask_sum": 212,
+          "holds": {
+            "6": {
+              "n": 212,
+              "symbol": "EURUSD",
+              "timeframe": "M5",
+              "bars_min": 5,
+              "pip": 0.0001,
+              "trades": 212,
+              "win_rate": 0.02358490566037736,
+              "avg_win_pips": 2.46000000000033,
+              "avg_loss_pips": -8.641545893719695,
+              "expectancy_net_pips": -8.379716981131958,
+              "profit_factor": 0.006876118067979544,
+              "gross_profit_pips": 167.80000000000572,
+              "gross_loss_pips": 375.9999999999808,
+              "total_net_pips": -1776.4999999999766,
+              "net_usd_norm": -1776.4999999999766,
+              "max_drawdown_pips": 1766.7999999999752,
+              "avg_duration_bars": 6.0,
+              "avg_duration_hours": 0.5,
+              "exposure": 0.005021019598555273,
+              "avg_cost_pips": 7.397641509433963,
+              "total_cost_pips": 1568.3,
+              "commission": 0.0,
+              "movement_to_cost": 0.13275521265062493,
+              "mean_raw_pips": -0.9820754716979957,
+              "t_test": {
+                "n": 212,
+                "t": -21.488497997819984,
+                "p": 1.9945992841933525e-102,
+                "mean": -8.379716981131958,
+                "se": 0.38996289931395317
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.32929918378835477,
+              "max_window_share": 0.06676048409794663,
+              "yearly": {
+                "2021": {
+                  "n": 65,
+                  "wins": 1,
+                  "net_pips": -464.8999999999851
+                },
+                "2022": {
+                  "n": 58,
+                  "wins": 4,
+                  "net_pips": -585.0000000000045
+                },
+                "2023": {
+                  "n": 66,
+                  "wins": 0,
+                  "net_pips": -565.399999999993
+                },
+                "2024": {
+                  "n": 23,
+                  "wins": 0,
+                  "net_pips": -161.19999999999243
+                }
+              },
+              "long": {
+                "n": 91,
+                "win_rate": 0.03296703296703297,
+                "net_pips": -632.6000000000014
+              },
+              "short": {
+                "n": 121,
+                "win_rate": 0.01652892561983471,
+                "net_pips": -1143.8999999999735
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 115,
+                  "net_pips": -901.0999999999858,
+                  "avg": -7.83565217391292
+                },
+                "normal": {
+                  "n": 55,
+                  "net_pips": -423.699999999994,
+                  "avg": -7.703636363636255
+                },
+                "high": {
+                  "n": 42,
+                  "net_pips": -451.69999999999527,
+                  "avg": -10.754761904761793
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "n=212 below 1000",
+              "bucket": "UNRESOLVED"
+            },
+            "24": {
+              "n": 212,
+              "symbol": "EURUSD",
+              "timeframe": "M5",
+              "bars_min": 5,
+              "pip": 0.0001,
+              "trades": 212,
+              "win_rate": 0.18867924528301888,
+              "avg_win_pips": 4.280000000000231,
+              "avg_loss_pips": -11.253488372092953,
+              "expectancy_net_pips": -8.32264150943386,
+              "profit_factor": 0.08844802645175157,
+              "gross_profit_pips": 453.0000000000145,
+              "gross_loss_pips": 1054.199999999993,
+              "total_net_pips": -1764.3999999999783,
+              "net_usd_norm": -1764.3999999999783,
+              "max_drawdown_pips": 1735.599999999978,
+              "avg_duration_bars": 24.0,
+              "avg_duration_hours": 2.0,
+              "exposure": 0.02008407839422109,
+              "avg_cost_pips": 5.48679245283019,
+              "total_cost_pips": 1163.2,
+              "commission": 0.0,
+              "movement_to_cost": 0.5168500687757723,
+              "mean_raw_pips": -2.835849056603672,
+              "t_test": {
+                "n": 212,
+                "t": -11.311843516165325,
+                "p": 1.1465486250882582e-29,
+                "mean": -8.32264150943386,
+                "se": 0.7357458134512106
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.3662434822035788,
+              "max_window_share": 0.07742008614826705,
+              "yearly": {
+                "2021": {
+                  "n": 65,
+                  "wins": 12,
+                  "net_pips": -430.2999999999966
+                },
+                "2022": {
+                  "n": 58,
+                  "wins": 11,
+                  "net_pips": -646.1999999999864
+                },
+                "2023": {
+                  "n": 66,
+                  "wins": 13,
+                  "net_pips": -520.599999999998
+                },
+                "2024": {
+                  "n": 23,
+                  "wins": 4,
+                  "net_pips": -167.29999999999754
+                }
+              },
+              "long": {
+                "n": 91,
+                "win_rate": 0.23076923076923078,
+                "net_pips": -642.0000000000038
+              },
+              "short": {
+                "n": 121,
+                "win_rate": 0.15702479338842976,
+                "net_pips": -1122.3999999999749
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 115,
+                  "net_pips": -897.899999999994,
+                  "avg": -7.807826086956469
+                },
+                "normal": {
+                  "n": 55,
+                  "net_pips": -355.4999999999881,
+                  "avg": -6.463636363636148
+                },
+                "high": {
+                  "n": 42,
+                  "net_pips": -510.9999999999964,
+                  "avg": -12.166666666666583
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "n=212 below 1000",
+              "bucket": "UNRESOLVED"
+            }
+          }
+        },
+        "EURGBP": {
+          "mask_sum": 255,
+          "holds": {
+            "6": {
+              "n": 255,
+              "symbol": "EURGBP",
+              "timeframe": "M5",
+              "bars_min": 5,
+              "pip": 0.0001,
+              "trades": 255,
+              "win_rate": 0.00392156862745098,
+              "avg_win_pips": 1.0000000000000497,
+              "avg_loss_pips": -21.396850393700763,
+              "expectancy_net_pips": -21.309019607843112,
+              "profit_factor": 0.0001839994112018935,
+              "gross_profit_pips": 178.30000000000237,
+              "gross_loss_pips": 957.4999999999955,
+              "total_net_pips": -5433.799999999998,
+              "net_usd_norm": -5433.799999999998,
+              "max_drawdown_pips": 5381.899999999998,
+              "avg_duration_bars": 6.0,
+              "avg_duration_hours": 0.5,
+              "exposure": 0.005993278127276858,
+              "avg_cost_pips": 18.253333333333334,
+              "total_cost_pips": 4654.6,
+              "commission": 0.0,
+              "movement_to_cost": 0.16740428823099582,
+              "mean_raw_pips": -3.0556862745097773,
+              "t_test": {
+                "n": 255,
+                "t": -34.256213396877655,
+                "p": 3.524649810837629e-257,
+                "mean": -21.309019607843112,
+                "se": 0.6220483087539781
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.3451544039162281,
+              "max_window_share": 0.05697670138761075,
+              "yearly": {
+                "2021": {
+                  "n": 74,
+                  "wins": 0,
+                  "net_pips": -1285.799999999999
+                },
+                "2022": {
+                  "n": 95,
+                  "wins": 1,
+                  "net_pips": -1875.4999999999998
+                },
+                "2023": {
+                  "n": 64,
+                  "wins": 0,
+                  "net_pips": -1781.699999999998
+                },
+                "2024": {
+                  "n": 22,
+                  "wins": 0,
+                  "net_pips": -490.7999999999969
+                }
+              },
+              "long": {
+                "n": 68,
+                "win_rate": 0.0,
+                "net_pips": -1065.0999999999976
+              },
+              "short": {
+                "n": 187,
+                "win_rate": 0.0053475935828877,
+                "net_pips": -4368.699999999995
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 40,
+                  "net_pips": -700.3999999999987,
+                  "avg": -17.50999999999997
+                },
+                "normal": {
+                  "n": 55,
+                  "net_pips": -1071.6000000000045,
+                  "avg": -19.48363636363645
+                },
+                "high": {
+                  "n": 160,
+                  "net_pips": -3661.79999999999,
+                  "avg": -22.88624999999994
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "n=255 below 1000",
+              "bucket": "UNRESOLVED"
+            },
+            "24": {
+              "n": 255,
+              "symbol": "EURGBP",
+              "timeframe": "M5",
+              "bars_min": 5,
+              "pip": 0.0001,
+              "trades": 255,
+              "win_rate": 0.03529411764705882,
+              "avg_win_pips": 3.1777777777779774,
+              "avg_loss_pips": -18.7512195121951,
+              "expectancy_net_pips": -17.977254901960755,
+              "profit_factor": 0.0062001387443639065,
+              "gross_profit_pips": 319.79999999999905,
+              "gross_loss_pips": 1510.399999999992,
+              "total_net_pips": -4584.199999999993,
+              "net_usd_norm": -4584.199999999993,
+              "max_drawdown_pips": 4546.699999999993,
+              "avg_duration_bars": 24.0,
+              "avg_duration_hours": 2.0,
+              "exposure": 0.02397311250910743,
+              "avg_cost_pips": 13.308235294117646,
+              "total_cost_pips": 3393.6,
+              "commission": 0.0,
+              "movement_to_cost": 0.3508368694012237,
+              "mean_raw_pips": -4.669019607843109,
+              "t_test": {
+                "n": 255,
+                "t": -24.725960006424724,
+                "p": 5.624681647525366e-135,
+                "mean": -17.977254901960755,
+                "se": 0.727059936086995
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.36156799441560267,
+              "max_window_share": 0.06524584442214576,
+              "yearly": {
+                "2021": {
+                  "n": 74,
+                  "wins": 4,
+                  "net_pips": -915.3999999999969
+                },
+                "2022": {
+                  "n": 95,
+                  "wins": 5,
+                  "net_pips": -1657.5000000000034
+                },
+                "2023": {
+                  "n": 64,
+                  "wins": 0,
+                  "net_pips": -1568.3999999999926
+                },
+                "2024": {
+                  "n": 22,
+                  "wins": 0,
+                  "net_pips": -442.89999999999964
+                }
+              },
+              "long": {
+                "n": 68,
+                "win_rate": 0.07352941176470588,
+                "net_pips": -655.9000000000003
+              },
+              "short": {
+                "n": 187,
+                "win_rate": 0.0213903743315508,
+                "net_pips": -3928.299999999992
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 40,
+                  "net_pips": -560.000000000003,
+                  "avg": -14.000000000000076
+                },
+                "normal": {
+                  "n": 55,
+                  "net_pips": -929.4000000000033,
+                  "avg": -16.89818181818188
+                },
+                "high": {
+                  "n": 160,
+                  "net_pips": -3094.7999999999865,
+                  "avg": -19.342499999999916
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "n=255 below 1000",
+              "bucket": "UNRESOLVED"
+            }
+          }
+        },
+        "GBPUSD": {
+          "mask_sum": 274,
+          "holds": {
+            "6": {
+              "n": 274,
+              "symbol": "GBPUSD",
+              "timeframe": "M5",
+              "bars_min": 5,
+              "pip": 0.0001,
+              "trades": 274,
+              "win_rate": 0.10948905109489052,
+              "avg_win_pips": 5.466666666666634,
+              "avg_loss_pips": -14.384426229508186,
+              "expectancy_net_pips": -12.210948905109486,
+              "profit_factor": 0.04672630919140667,
+              "gross_profit_pips": 487.4999999999896,
+              "gross_loss_pips": 844.9999999999891,
+              "total_net_pips": -3345.7999999999956,
+              "net_usd_norm": -3345.7999999999956,
+              "max_drawdown_pips": 3348.299999999996,
+              "avg_duration_bars": 6.0,
+              "avg_duration_hours": 0.5,
+              "exposure": 0.0073116060627623995,
+              "avg_cost_pips": 10.906204379562045,
+              "total_cost_pips": 2988.3,
+              "commission": 0.0,
+              "movement_to_cost": 0.11963323628819043,
+              "mean_raw_pips": -1.3047445255474435,
+              "t_test": {
+                "n": 274,
+                "t": -17.408478913037307,
+                "p": 7.1149315768113284e-68,
+                "mean": -12.210948905109486,
+                "se": 0.7014368668341631
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.30793831071791594,
+              "max_window_share": 0.056040408870822886,
+              "yearly": {
+                "2021": {
+                  "n": 82,
+                  "wins": 6,
+                  "net_pips": -832.3999999999932
+                },
+                "2022": {
+                  "n": 90,
+                  "wins": 13,
+                  "net_pips": -1030.3000000000018
+                },
+                "2023": {
+                  "n": 67,
+                  "wins": 8,
+                  "net_pips": -1007.000000000007
+                },
+                "2024": {
+                  "n": 35,
+                  "wins": 3,
+                  "net_pips": -476.09999999999746
+                }
+              },
+              "long": {
+                "n": 126,
+                "win_rate": 0.15079365079365079,
+                "net_pips": -1190.7000000000048
+              },
+              "short": {
+                "n": 148,
+                "win_rate": 0.07432432432432433,
+                "net_pips": -2155.099999999995
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 77,
+                  "net_pips": -918.9999999999941,
+                  "avg": -11.935064935064855
+                },
+                "normal": {
+                  "n": 74,
+                  "net_pips": -1173.5000000000061,
+                  "avg": -15.858108108108189
+                },
+                "high": {
+                  "n": 123,
+                  "net_pips": -1253.2999999999993,
+                  "avg": -10.18943089430894
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "n=274 below 1000",
+              "bucket": "UNRESOLVED"
+            },
+            "24": {
+              "n": 274,
+              "symbol": "GBPUSD",
+              "timeframe": "M5",
+              "bars_min": 5,
+              "pip": 0.0001,
+              "trades": 274,
+              "win_rate": 0.21532846715328466,
+              "avg_win_pips": 9.474576271186349,
+              "avg_loss_pips": -16.20372093023249,
+              "expectancy_net_pips": -10.674452554744493,
+              "profit_factor": 0.1604569722716565,
+              "gross_profit_pips": 1107.1999999999994,
+              "gross_loss_pips": 1820.59999999999,
+              "total_net_pips": -2924.7999999999915,
+              "net_usd_norm": -2924.7999999999915,
+              "max_drawdown_pips": 2906.7999999999915,
+              "avg_duration_bars": 24.0,
+              "avg_duration_hours": 2.0,
+              "exposure": 0.029246424251049598,
+              "avg_cost_pips": 8.07080291970803,
+              "total_cost_pips": 2211.4,
+              "commission": 0.0,
+              "movement_to_cost": 0.32260106719724646,
+              "mean_raw_pips": -2.603649635036463,
+              "t_test": {
+                "n": 274,
+                "t": -10.209785865005609,
+                "p": 1.792600071947373e-24,
+                "mean": -10.674452554744493,
+                "se": 1.0455118937735555
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.3263471006564577,
+              "max_window_share": 0.0561405908096277,
+              "yearly": {
+                "2021": {
+                  "n": 82,
+                  "wins": 16,
+                  "net_pips": -732.7999999999998
+                },
+                "2022": {
+                  "n": 90,
+                  "wins": 23,
+                  "net_pips": -922.5999999999946
+                },
+                "2023": {
+                  "n": 67,
+                  "wins": 11,
+                  "net_pips": -954.5000000000048
+                },
+                "2024": {
+                  "n": 35,
+                  "wins": 9,
+                  "net_pips": -314.89999999999134
+                }
+              },
+              "long": {
+                "n": 126,
+                "win_rate": 0.2777777777777778,
+                "net_pips": -883.5000000000055
+              },
+              "short": {
+                "n": 148,
+                "win_rate": 0.16216216216216217,
+                "net_pips": -2041.2999999999852
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 77,
+                  "net_pips": -569.999999999996,
+                  "avg": -7.402597402597352
+                },
+                "normal": {
+                  "n": 74,
+                  "net_pips": -1027.7999999999993,
+                  "avg": -13.88918918918918
+                },
+                "high": {
+                  "n": 123,
+                  "net_pips": -1326.9999999999957,
+                  "avg": -10.788617886178827
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "n=274 below 1000",
+              "bucket": "UNRESOLVED"
+            }
+          }
+        }
+      }
+    },
+    "P-WICK": {
+      "experiment": {
+        "id": "P-WICK",
+        "name": "H1 long-wick rejection candles",
+        "hypothesis": "E - market structure (rejection/wick)",
+        "tf": "H1",
+        "holds": [
+          2,
+          6
+        ],
+        "rationale": "Price-structure rejection behavior has never been tested in any phase."
+      },
+      "symbols": {
+        "EURUSD": {
+          "mask_sum": 4508,
+          "holds": {
+            "2": {
+              "n": 4507,
+              "symbol": "EURUSD",
+              "timeframe": "H1",
+              "bars_min": 60,
+              "pip": 0.0001,
+              "trades": 4507,
+              "win_rate": 0.38828489017084533,
+              "avg_win_pips": 9.710399999999982,
+              "avg_loss_pips": -10.609720710917689,
+              "expectancy_net_pips": -2.719724872420702,
+              "profit_factor": 0.5809442412225199,
+              "gross_profit_pips": 20701.59999999994,
+              "gross_loss_pips": 23490.100000000046,
+              "total_net_pips": -12257.800000000112,
+              "net_usd_norm": -12257.800000000112,
+              "max_drawdown_pips": 12358.200000000095,
+              "avg_duration_bars": 2.0,
+              "avg_duration_hours": 2.0,
+              "exposure": 0.4268396628468605,
+              "avg_cost_pips": 2.1010206345684495,
+              "total_cost_pips": 9469.300000000001,
+              "commission": 0.0,
+              "movement_to_cost": 0.29447794451544496,
+              "mean_raw_pips": -0.6187042378522528,
+              "t_test": {
+                "n": 4507,
+                "t": -12.261289647266578,
+                "p": 1.4615511526221844e-34,
+                "mean": -2.719724872420702,
+                "se": 0.2218139323563744
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.38860154350698883,
+              "max_window_share": 0.05728597301310144,
+              "yearly": {
+                "2021": {
+                  "n": 1302,
+                  "wins": 515,
+                  "net_pips": -2978.500000000041
+                },
+                "2022": {
+                  "n": 1315,
+                  "wins": 517,
+                  "net_pips": -4763.4000000000115
+                },
+                "2023": {
+                  "n": 1357,
+                  "wins": 507,
+                  "net_pips": -3554.9000000000274
+                },
+                "2024": {
+                  "n": 533,
+                  "wins": 211,
+                  "net_pips": -961.0000000000257
+                }
+              },
+              "long": {
+                "n": 1470,
+                "win_rate": 0.40068027210884355,
+                "net_pips": -4540.100000000026
+              },
+              "short": {
+                "n": 3037,
+                "win_rate": 0.3822851498189002,
+                "net_pips": -7717.700000000078
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 1822,
+                  "net_pips": -4598.800000000036,
+                  "avg": -2.5240395170142897
+                },
+                "normal": {
+                  "n": 1342,
+                  "net_pips": -3457.100000000045,
+                  "avg": -2.5760804769001826
+                },
+                "high": {
+                  "n": 1343,
+                  "net_pips": -4201.900000000023,
+                  "avg": -3.1287416232315883
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "movement-to-cost 0.29 (bar 1.0), |mean| 0.62 (bar 2.0)",
+              "bucket": "REJECTED"
+            },
+            "6": {
+              "n": 4506,
+              "symbol": "EURUSD",
+              "timeframe": "H1",
+              "bars_min": 60,
+              "pip": 0.0001,
+              "trades": 4506,
+              "win_rate": 0.4471815357301376,
+              "avg_win_pips": 17.186799007444154,
+              "avg_loss_pips": -18.710919309514278,
+              "expectancy_net_pips": -2.658122503328914,
+              "profit_factor": 0.743021182649664,
+              "gross_profit_pips": 38900.89999999995,
+              "gross_loss_pips": 41426.600000000035,
+              "total_net_pips": -11977.500000000095,
+              "net_usd_norm": -11977.500000000095,
+              "max_drawdown_pips": 12432.20000000008,
+              "avg_duration_bars": 6.0,
+              "avg_duration_hours": 6.0,
+              "exposure": 1.2802348707263946,
+              "avg_cost_pips": 2.0976031957390147,
+              "total_cost_pips": 9451.800000000001,
+              "commission": 0.0,
+              "movement_to_cost": 0.2672189424236746,
+              "mean_raw_pips": -0.5605193075898997,
+              "t_test": {
+                "n": 4506,
+                "t": -6.839933280743837,
+                "p": 7.923007201617805e-12,
+                "mean": -2.658122503328914,
+                "se": 0.3886181917610526
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.4409851805468546,
+              "max_window_share": 0.07395533291588333,
+              "yearly": {
+                "2021": {
+                  "n": 1302,
+                  "wins": 557,
+                  "net_pips": -2964.0000000000236
+                },
+                "2022": {
+                  "n": 1315,
+                  "wins": 591,
+                  "net_pips": -5281.899999999992
+                },
+                "2023": {
+                  "n": 1357,
+                  "wins": 612,
+                  "net_pips": -3242.100000000057
+                },
+                "2024": {
+                  "n": 532,
+                  "wins": 255,
+                  "net_pips": -489.5000000000157
+                }
+              },
+              "long": {
+                "n": 1469,
+                "win_rate": 0.44179714091218514,
+                "net_pips": -5728.0999999999985
+              },
+              "short": {
+                "n": 3037,
+                "win_rate": 0.4497859729996707,
+                "net_pips": -6249.40000000009
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 1822,
+                  "net_pips": -4235.600000000077,
+                  "avg": -2.3246981339188126
+                },
+                "normal": {
+                  "n": 1341,
+                  "net_pips": -3902.699999999977,
+                  "avg": -2.910290827740475
+                },
+                "high": {
+                  "n": 1343,
+                  "net_pips": -3839.200000000034,
+                  "avg": -2.858674609084165
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "movement-to-cost 0.27 (bar 1.0), |mean| 0.56 (bar 2.0)",
+              "bucket": "REJECTED"
+            }
+          }
+        },
+        "EURGBP": {
+          "mask_sum": 4894,
+          "holds": {
+            "2": {
+              "n": 4893,
+              "symbol": "EURGBP",
+              "timeframe": "H1",
+              "bars_min": 60,
+              "pip": 0.0001,
+              "trades": 4893,
+              "win_rate": 0.2675250357653791,
+              "avg_win_pips": 6.329870129870127,
+              "avg_loss_pips": -8.045145089285723,
+              "expectancy_net_pips": -4.199468628653185,
+              "profit_factor": 0.28736413514694514,
+              "gross_profit_pips": 14388.49999999996,
+              "gross_loss_pips": 15930.399999999994,
+              "total_net_pips": -20548.0,
+              "net_usd_norm": -20548.0,
+              "max_drawdown_pips": 20547.899999999998,
+              "avg_duration_bars": 2.0,
+              "avg_duration_hours": 2.0,
+              "exposure": 0.45963082992813864,
+              "avg_cost_pips": 3.884344982628245,
+              "total_cost_pips": 19006.100000000002,
+              "commission": 0.0,
+              "movement_to_cost": 0.08112658567512712,
+              "mean_raw_pips": -0.3151236460249405,
+              "t_test": {
+                "n": 4893,
+                "t": -28.426357951531195,
+                "p": 9.553346048870485e-178,
+                "mean": -4.199468628653185,
+                "se": 0.14773150453580985
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.3479462721432745,
+              "max_window_share": 0.04649114269028622,
+              "yearly": {
+                "2021": {
+                  "n": 1412,
+                  "wins": 393,
+                  "net_pips": -5430.499999999997
+                },
+                "2022": {
+                  "n": 1441,
+                  "wins": 424,
+                  "net_pips": -7149.600000000004
+                },
+                "2023": {
+                  "n": 1411,
+                  "wins": 365,
+                  "net_pips": -6044.800000000018
+                },
+                "2024": {
+                  "n": 629,
+                  "wins": 127,
+                  "net_pips": -1923.1000000000045
+                }
+              },
+              "long": {
+                "n": 1600,
+                "win_rate": 0.278125,
+                "net_pips": -5910.099999999988
+              },
+              "short": {
+                "n": 3293,
+                "win_rate": 0.26237473428484664,
+                "net_pips": -14637.900000000047
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 1988,
+                  "net_pips": -7681.400000000013,
+                  "avg": -3.863883299798799
+                },
+                "normal": {
+                  "n": 1471,
+                  "net_pips": -6529.40000000002,
+                  "avg": -4.438749150237947
+                },
+                "high": {
+                  "n": 1434,
+                  "net_pips": -6337.200000000002,
+                  "avg": -4.419246861924687
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "movement-to-cost 0.08 (bar 1.0), |mean| 0.32 (bar 2.0)",
+              "bucket": "REJECTED"
+            },
+            "6": {
+              "n": 4893,
+              "symbol": "EURGBP",
+              "timeframe": "H1",
+              "bars_min": 60,
+              "pip": 0.0001,
+              "trades": 4893,
+              "win_rate": 0.34150827713059473,
+              "avg_win_pips": 10.939018551765392,
+              "avg_loss_pips": -12.152079453755436,
+              "expectancy_net_pips": -4.266278356836304,
+              "profit_factor": 0.46685140726362473,
+              "gross_profit_pips": 25422.399999999965,
+              "gross_loss_pips": 27438.800000000007,
+              "total_net_pips": -20874.900000000045,
+              "net_usd_norm": -20874.900000000045,
+              "max_drawdown_pips": 20875.300000000047,
+              "avg_duration_bars": 6.0,
+              "avg_duration_hours": 6.0,
+              "exposure": 1.378892489784416,
+              "avg_cost_pips": 3.85417944001635,
+              "total_cost_pips": 18858.5,
+              "commission": 0.0,
+              "movement_to_cost": 0.10692260784261953,
+              "mean_raw_pips": -0.41209891681995514,
+              "t_test": {
+                "n": 4893,
+                "t": -17.524736761895216,
+                "p": 9.276992032169703e-69,
+                "mean": -4.266278356836304,
+                "se": 0.2434432205630989
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.33782676803242145,
+              "max_window_share": 0.04918346914236734,
+              "yearly": {
+                "2021": {
+                  "n": 1412,
+                  "wins": 479,
+                  "net_pips": -5625.19999999999
+                },
+                "2022": {
+                  "n": 1441,
+                  "wins": 518,
+                  "net_pips": -7052.10000000001
+                },
+                "2023": {
+                  "n": 1411,
+                  "wins": 484,
+                  "net_pips": -6060.200000000016
+                },
+                "2024": {
+                  "n": 629,
+                  "wins": 190,
+                  "net_pips": -2137.4000000000224
+                }
+              },
+              "long": {
+                "n": 1600,
+                "win_rate": 0.3375,
+                "net_pips": -6690.399999999989
+              },
+              "short": {
+                "n": 3293,
+                "win_rate": 0.34345581536592773,
+                "net_pips": -14184.500000000053
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 1988,
+                  "net_pips": -8296.700000000023,
+                  "avg": -4.1733903420523255
+                },
+                "normal": {
+                  "n": 1471,
+                  "net_pips": -6620.1000000000295,
+                  "avg": -4.500407885791998
+                },
+                "high": {
+                  "n": 1434,
+                  "net_pips": -5958.0999999999885,
+                  "avg": -4.154881450488137
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "movement-to-cost 0.11 (bar 1.0), |mean| 0.41 (bar 2.0)",
+              "bucket": "REJECTED"
+            }
+          }
+        },
+        "GBPUSD": {
+          "mask_sum": 4085,
+          "holds": {
+            "2": {
+              "n": 4085,
+              "symbol": "GBPUSD",
+              "timeframe": "H1",
+              "bars_min": 60,
+              "pip": 0.0001,
+              "trades": 4085,
+              "win_rate": 0.3777233782129743,
+              "avg_win_pips": 13.698120544394106,
+              "avg_loss_pips": -14.783949645948068,
+              "expectancy_net_pips": -4.025605875152969,
+              "profit_factor": 0.5624201720027278,
+              "gross_profit_pips": 26887.30000000011,
+              "gross_loss_pips": 28249.79999999999,
+              "total_net_pips": -16444.599999999882,
+              "net_usd_norm": -16444.599999999882,
+              "max_drawdown_pips": 16488.599999999886,
+              "avg_duration_bars": 2.0,
+              "avg_duration_hours": 2.0,
+              "exposure": 0.435872812633376,
+              "avg_cost_pips": 3.6920685434516525,
+              "total_cost_pips": 15082.1,
+              "commission": 0.0,
+              "movement_to_cost": 0.09033887853812668,
+              "mean_raw_pips": -0.3335373317013171,
+              "t_test": {
+                "n": 4085,
+                "t": -11.967634296375047,
+                "p": 5.2504371589629215e-33,
+                "mean": -4.025605875152969,
+                "se": 0.33637440578981515
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.35561217664157163,
+              "max_window_share": 0.07294795860039162,
+              "yearly": {
+                "2021": {
+                  "n": 1066,
+                  "wins": 433,
+                  "net_pips": -3159.399999999953
+                },
+                "2022": {
+                  "n": 1179,
+                  "wins": 449,
+                  "net_pips": -5434.099999999989
+                },
+                "2023": {
+                  "n": 1262,
+                  "wins": 477,
+                  "net_pips": -5847.899999999947
+                },
+                "2024": {
+                  "n": 578,
+                  "wins": 184,
+                  "net_pips": -2003.1999999999975
+                }
+              },
+              "long": {
+                "n": 1381,
+                "win_rate": 0.37943519188993485,
+                "net_pips": -5879.299999999949
+              },
+              "short": {
+                "n": 2704,
+                "win_rate": 0.3768491124260355,
+                "net_pips": -10565.29999999993
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 1703,
+                  "net_pips": -6498.699999999915,
+                  "avg": -3.8160305343510954
+                },
+                "normal": {
+                  "n": 1169,
+                  "net_pips": -4560.699999999988,
+                  "avg": -3.9013686911890404
+                },
+                "high": {
+                  "n": 1213,
+                  "net_pips": -5385.199999999977,
+                  "avg": -4.439571310799652
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "movement-to-cost 0.09 (bar 1.0), |mean| 0.33 (bar 2.0)",
+              "bucket": "REJECTED"
+            },
+            "6": {
+              "n": 4084,
+              "symbol": "GBPUSD",
+              "timeframe": "H1",
+              "bars_min": 60,
+              "pip": 0.0001,
+              "trades": 4084,
+              "win_rate": 0.43535749265426055,
+              "avg_win_pips": 25.6057930258718,
+              "avg_loss_pips": -26.12237640936687,
+              "expectancy_net_pips": -3.6021302644466053,
+              "profit_factor": 0.755784535394485,
+              "gross_profit_pips": 52179.00000000003,
+              "gross_loss_pips": 51976.59999999996,
+              "total_net_pips": -14711.09999999993,
+              "net_usd_norm": -14711.09999999993,
+              "max_drawdown_pips": 14791.399999999929,
+              "avg_duration_bars": 6.0,
+              "avg_duration_hours": 6.0,
+              "exposure": 1.3072983354673495,
+              "avg_cost_pips": 3.6516895200783543,
+              "total_cost_pips": 14913.5,
+              "commission": 0.0,
+              "movement_to_cost": 0.01357159620478527,
+              "mean_raw_pips": 0.04955925563174954,
+              "t_test": {
+                "n": 4084,
+                "t": -5.674536361030856,
+                "p": 1.3906477779320272e-08,
+                "mean": -3.6021302644466053,
+                "se": 0.6347884717390779
+              },
+              "years_count": 4,
+              "years_total": 4,
+              "years_positive_share": 0.0,
+              "max_year_share": 0.4079300664124359,
+              "max_window_share": 0.11355371114328687,
+              "yearly": {
+                "2021": {
+                  "n": 1066,
+                  "wins": 483,
+                  "net_pips": -2237.6999999999866
+                },
+                "2022": {
+                  "n": 1179,
+                  "wins": 508,
+                  "net_pips": -4671.199999999988
+                },
+                "2023": {
+                  "n": 1262,
+                  "wins": 540,
+                  "net_pips": -6001.099999999957
+                },
+                "2024": {
+                  "n": 577,
+                  "wins": 247,
+                  "net_pips": -1801.100000000011
+                }
+              },
+              "long": {
+                "n": 1381,
+                "win_rate": 0.44605358435916004,
+                "net_pips": -5026.599999999989
+              },
+              "short": {
+                "n": 2703,
+                "win_rate": 0.4298927118017018,
+                "net_pips": -9684.499999999947
+              },
+              "regime_buckets": {
+                "low": {
+                  "n": 1703,
+                  "net_pips": -5401.199999999921,
+                  "avg": -3.1715795654726486
+                },
+                "normal": {
+                  "n": 1169,
+                  "net_pips": -5368.600000000047,
+                  "avg": -4.592472198460263
+                },
+                "high": {
+                  "n": 1212,
+                  "net_pips": -3941.2999999999683,
+                  "avg": -3.25189768976895
+                }
+              },
+              "_pos_symbols": 0,
+              "verdict": "INSUFF",
+              "reason": "movement-to-cost 0.01 (bar 1.0), |mean| 0.05 (bar 2.0)",
+              "bucket": "REJECTED"
+            }
+          }
+        }
+      }
+    }
+  }
+}

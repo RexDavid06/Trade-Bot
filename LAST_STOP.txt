@@ -1,0 +1,19 @@
+Locked in: demo account, placing demo trades during the window — exactly what we need for real fill data. Here's the final plan ready to execute on your approval:
+Path A — Final plan (demo trading on MT5)
+Step 1 — Pre-flight (no code changes)
+- Pull the strongest candidate behaviors' mean_raw_pips from the existing results JSONs → build outputs/live_cost_breakeven.json (cost each rule can afford).
+- Verify the MT5 demo connection and EURUSD symbol from your terminal.
+Step 2 — Telemetry on bot.py (logging-only) 
+- Add TradeLogger: one CSV row per order fill → timestamp, side, ask/bid + spread at signal, requested vs actual fill price, slippage, commission, SL/TP, and the closed-candle EMA/RSI/ATR values that triggered it.
+- Add close-side collector via history_deals_get → realized pnl + closing slippage → true round-trip cost.
+- Field-config outputs/live/ log dir; trading logic untouched; new tests/test_live_cost.py covers the logger math.
+Step 3 — Run window (4 weeks)
+- You run bot.py on the demo as usual (it will trade demo positions). Target ≥500 round-trips.
+- I review the log every ~2 weeks.
+Step 4 — Decision gate
+- backtest/live_cost_analysis.py computes real mean round-trip cost (pips) + distribution.
+- GO to implement a rule only if real cost + 0.5 pip margin < that rule's raw movement. Every candidate gets a GO/NO-GO verdict in outputs/live_cost_report.md.
+Step 5 — Only if GO: port the winning rule into bot.py (same closed-candle discipline), verify equivalence, paper-trade 2–3 weeks, then real money only after stable positive weeks.
+Stop condition: NO-GO everywhere → definitive answer, $0 lost, everything still honest.
+Ready when you are — approve/exit plan mode and I'll start with Step 1.
+▣  Plan · Big Pickle · 18.6s

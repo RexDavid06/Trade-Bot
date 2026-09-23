@@ -25,7 +25,7 @@ import pandas as pd
 
 from typing import Callable
 
-from .config import CostConfig, StrategyConfig
+from .config import CostConfig, StrategyConfig, lot_for_balance
 from .strategy import BUY, SELL, signal_at
 
 SignalFn = Callable[[pd.DataFrame, int, StrategyConfig], str | None]
@@ -56,6 +56,7 @@ class Trade:
     cost_pips: float
     net_money: float
     gross_money: float
+    lot: float = 0.0
     r_multiple: float = 0.0
     signal_rsi: float | None = None
     ema_sep: float | None = None
@@ -82,6 +83,7 @@ class Trade:
             "gross_pips": round(self.gross_pips, 1),
             "cost_pips": round(self.cost_pips, 1),
             "net_pips": round(self.net_pips, 1),
+            "lot": round(self.lot, 2),
             "net_money": round(self.net_money, 2),
             "gross_money": round(self.gross_money, 2),
             "r_multiple": round(self.r_multiple, 3),
@@ -106,6 +108,7 @@ class _Position:
     take_profit: float
     atr: float
     cost_price: float
+    lot: float = 0.0
     signal_rsi: float | None = None
     signal_ema_fast: float | None = None
     signal_ema_slow: float | None = None
@@ -178,9 +181,10 @@ def _finalize(
     cost_pips = position.cost_price / c_cfg.pip
     net_pips = gross_pips - cost_pips
 
-    notional = c_cfg.lot_size * c_cfg.base_contract
+    lot = position.lot
+    notional = lot * c_cfg.base_contract
     gross_money = gross_price * notional
-    net_money = gross_money - position.cost_price * notional - c_cfg.commission_per_lot * c_cfg.lot_size
+    net_money = gross_money - position.cost_price * notional - c_cfg.commission_per_lot * lot
 
     result = classify_result(net_money)
 
@@ -207,6 +211,7 @@ def _finalize(
         cost_pips=cost_pips,
         net_money=net_money,
         gross_money=gross_money,
+        lot=lot,
         r_multiple=r_multiple,
         signal_rsi=position.signal_rsi,
         ema_sep=(
@@ -275,6 +280,7 @@ def run_backtest(
                 take_profit=tp,
                 atr=atr,
                 cost_price=_cost_price(df, i, c_cfg),
+                lot=lot_for_balance(balance, c_cfg),
                 signal_rsi=float(df["rsi"].iat[i - 1]),
                 signal_ema_fast=float(df["ema_fast"].iat[i - 1]),
                 signal_ema_slow=float(df["ema_slow"].iat[i - 1]),

@@ -1,401 +1,491 @@
-PHASE 5 — BROKER-ACCURATE DATA + MARKET EXPANSION
+You are auditing my algorithmic-trading research repository.
 
-OBJECTIVE
+IMPORTANT: This is an AUDIT ONLY. Do not implement a strategy, modify strategy code, modify bot.py, modify V1/V2, run optimization, run backtests, read validation/holdout data, or change any research configuration.
 
-Phase 3 and Phase 4 both failed to identify an economically viable forex behavior.
+## OBJECTIVE
 
-Phase 3:
-- M5 behavior did not clear realistic costs.
-- Best movement-to-cost ratio: 0.66.
+I need a rigorous reconstruction of where the trading research currently stands so we can decide what genuinely new behavioral dimension to investigate next.
 
-Phase 4:
-- 1h–24h multi-hour behavior also did not clear costs.
-- Best movement-to-cost ratio: 0.73.
-- No behavior was classified as potentially viable.
+The latest completed DEV-only research round is documented in the supplied EDGE DISCOVERY RESULTS.
 
-Therefore:
+The latest experiment found:
 
-DO NOT create another M5 strategy.
-DO NOT create Strategy 04.
-DO NOT tune Strategies 01–03.
-DO NOT modify bot.py.
-DO NOT optimize parameters.
+* B-PB — aligned two-timeframe pullback resumption → REJECTED
+* E-SQZ — low-ATR squeeze then range breakout → UNRESOLVED because event count was below n=1000
+* G-CANDLE — large-body candle momentum → UNRESOLVED because event count was below n=1000
+* H-ALIGN — H1/H4 trend-sign confluence → REJECTED
+* J-FADE-REGIME — low-ATR regime fade → REJECTED; GBPUSD H1/H=12 produced positive raw/net results but failed statistical significance and concentration requirements
+* No experiment cleared the full pre-registered viability screen.
 
-The purpose of Phase 5 is to determine whether the problem is:
+The research constraints remain:
 
-A. inadequate/overestimated historical cost data,
-B. timeframe construction,
-C. the selected FX pairs,
-D. or the FX market itself.
+* DEV split only
+* 60/20/20 preserved
+* validation and holdout MUST NOT be read
+* no optimization
+* no parameter sweeps
+* no strategy implementation
+* no changes to bot.py
+* no changes to V1/V2
+* no changes to Strategies 01-03
+* EURJPY remains excluded because of known degraded data quality
+* volume-dependent research remains excluded because the available real volume is unusable
+* research must remain evidence-first and pre-registered
 
-The ultimate project goal remains:
+## FIRST: INSPECT THE REPOSITORY
 
-FIND ONE CREDIBLE EDGE → VALIDATE IT → CONNECT IT TO MT5 DEMO.
-
-This phase must move us toward that goal without unnecessary infrastructure work.
-
-==================================================
-PHASE 5A — AUDIT CURRENT DATA/COST MODEL
-==================================================
-
-Before obtaining anything new, inspect the existing project and document:
-
-1. What historical price data is currently available.
-2. Which files contain bid/ask/spread information.
-3. How spread is represented.
-4. How transaction costs are currently modeled.
-5. What slippage/commission assumptions are used.
-6. Whether the historical spread represents actual broker conditions.
-7. Which broker/account the current MT5 bot is configured to use.
-8. Whether historical data can realistically represent that broker's execution environment.
-
-Do NOT modify the existing strategy engine merely to perform this audit.
-
-==================================================
-PHASE 5B — BROKER-ACCURATE DATA
-==================================================
-
-We eventually need historical data that is as close as practical to the broker/account that will be used for demo trading.
-
-First inspect the repository and local machine for existing MT5/exported historical data.
+Before making any conclusion, inspect the repository structure and relevant files.
 
 Look for:
 
-- MT5 history
-- CSV exports
-- tick data
-- bid/ask data
-- broker-specific data
-- existing data download utilities
-- symbol specifications
-- contract specifications
+* TASK.md
+* EDGE_DISCOVERY_PLAN.md
+* EDGE_DISCOVERY_RESULTS.md
+* research documentation
+* strategy definitions
+* experiment definitions
+* backtest engine
+* feature/indicator calculations
+* data loading code
+* split definitions
+* DEV/validation/holdout handling
+* reports
+* experiment logs
+* previous research notes
+* bot.py
+* V1
+* V2
+* Strategies 01-03
+* any archived or abandoned experiments
 
-Do NOT download random historical data from an arbitrary source merely to produce another backtest.
+Do not assume filenames are exactly as listed above. Search the repository.
 
-If broker-accurate historical bid/ask data is NOT already available locally:
+Use read-only inspection.
 
-STOP the implementation portion and clearly report:
+## SECOND: RECONSTRUCT THE RESEARCH HISTORY
 
-- what is missing
-- what exact data is required
-- what format the data should have
-- how much history is needed
-- which symbols/timeframes are needed
-- what broker information is needed
+Create a chronological research map.
 
-Do not fabricate broker data.
+For every experiment you can identify, record:
 
-==================================================
-PHASE 5C — TIMEFRAME CONSTRUCTION
-==================================================
+1. Experiment ID/name
+2. Behavioral hypothesis
+3. Market behavior being tested
+4. Direction:
 
-If suitable underlying data exists, construct/verify:
+   * trend following
+   * mean reversion
+   * breakout
+   * momentum
+   * volatility
+   * regime dependence
+   * multi-timeframe structure
+   * candle/event behavior
+   * etc.
+5. Timeframe
+6. Holding horizon
+7. Symbols
+8. Signal/event definition
+9. Whether it used indicators or price structure
+10. Whether it was event-based or continuously active
+11. Whether it was tested on DEV/validation/holdout
+12. Whether costs were included
+13. Result
+14. Final classification:
 
-- M5
-- M15
-- H1
-- H4
+* DISCOVERED
+* REJECTED
+* UNRESOLVED
+* NOT TESTED
 
-from the same underlying source where possible.
+15. Exact reason for the classification
+16. Source file(s) supporting the conclusion
 
-Important:
+Do NOT infer that two experiments are different merely because their names differ.
 
-Do NOT independently source different datasets for each timeframe.
+## THIRD: BUILD A BEHAVIORAL-DIMENSION MAP
 
-Where tick or bid/ask data exists, preserve:
+This is the most important part.
 
-- timestamp
-- bid
-- ask
-- spread
-- OHLC construction rules
+Create a matrix of the actual behavioral dimensions investigated so far.
 
-Document timezone/session assumptions.
+At minimum examine:
 
-Ensure bars are constructed without lookahead.
+### A. Trend behavior
 
-==================================================
-PHASE 5D — COST REALISM
-==================================================
+* trend continuation
+* trend pullback/resumption
+* trend reversal
+* trend exhaustion
+* trend acceleration/deceleration
+* multi-timeframe trend alignment
 
-Determine the actual trading economics for the intended MT5 demo account.
+### B. Mean reversion
 
-Document:
+* unconditional mean reversion
+* extreme-price fade
+* regime-conditioned mean reversion
+* volatility-conditioned mean reversion
+* distance-from-equilibrium behavior
 
-- typical spread
-- commission
-- minimum lot
-- lot step
-- contract size
-- stop distance restrictions
-- execution/filling constraints
-- trading hours
-- symbol specifications
+### C. Momentum
 
-Do not guess values.
+* short-term momentum
+* medium-term momentum
+* long-term momentum
+* large-candle continuation
+* breakout continuation
+* momentum after volatility expansion
 
-If exact values cannot be obtained from the repository or broker configuration, clearly mark them UNKNOWN.
+### D. Volatility
 
-Do not silently substitute generic values.
+* volatility contraction
+* volatility expansion
+* squeeze/breakout
+* volatility regime persistence
+* volatility shock
+* volatility mean reversion
+* volatility clustering
 
-==================================================
-PHASE 5E — RECHECK EXISTING MARKET BEHAVIORS
-==================================================
+### E. Market structure
 
-ONLY after reliable data/cost information is available:
+* swing highs/lows
+* break of structure
+* failed breakouts
+* range boundaries
+* support/resistance behavior
+* compression before expansion
+* rejection/wick behavior
 
-Re-test the existing broad market behaviors that were already identified in Phases 3 and 4.
+### F. Time/seasonality
 
-Do NOT create new strategies.
+* hour-of-day
+* day-of-week
+* session transitions
+* overlap periods
+* overnight behavior
+* weekend effects
+* month/quarter effects
 
-Investigate only:
+IMPORTANT:
+Do not actually test session/time effects now. Only determine whether they have already been tested.
 
-1. directional persistence
-2. multi-hour reversal
-3. session-open behavior
-4. volatility expansion
-5. breakout continuation/failure
-6. movement-to-cost
+### G. Cross-timeframe behavior
 
-Use a small number of economically motivated horizons.
+* alignment
+* disagreement
+* transition between regimes
+* higher-TF trend + lower-TF reversal
+* lower-TF impulse inside higher-TF range
+* timeframe-specific persistence
 
-Do not perform a parameter sweep.
+### H. Cross-asset / cross-symbol behavior
 
-The purpose is NOT to find a profitable backtest.
+* pair-relative behavior
+* EURUSD/GBPUSD/EURGBP relationships
+* lead/lag
+* correlated-pair divergence
+* relative strength
+* cross-pair confirmation
 
-The purpose is to determine whether improved data/cost modeling materially changes the economic conclusion.
+Again, only identify whether these dimensions have been tested. Do not run them.
 
-==================================================
-PHASE 5F — MARKET EXPANSION DECISION
-==================================================
+### I. Event/context behavior
 
-If broker-accurate FX data STILL shows no economically viable behavior:
+* news
+* volatility shocks
+* large gaps
+* spread expansion
+* unusual candle ranges
+* unusual consecutive returns
+* regime transitions
 
-DO NOT continue searching endlessly through EURUSD/EURGBP/GBPUSD.
+Again, research/audit only.
 
-Expand the research universe.
+## FOURTH: DISTINGUISH "TESTED" FROM "ACTUALLY EXHAUSTED"
 
-Investigate a SMALL, predefined set of liquid instruments available through the intended MT5 broker.
+This distinction is critical.
 
-Before researching them, inspect broker availability/specifications if possible.
+For each behavioral dimension classify it as exactly one of:
 
-Potential categories may include:
+### EXHAUSTED
 
-- major FX pairs not previously studied
-- selected indices
-- selected commodities
-- selected liquid CFDs
+Multiple reasonable formulations have already been tested and evidence is consistently weak/negative.
 
-Do NOT automatically assume any instrument is better.
+### TESTED-BUT-NOT-EXHAUSTED
 
-Do NOT search hundreds of symbols.
+At least one formulation has been tested, but materially different formulations remain.
 
-Create a small, economically justified universe.
+### UNRESOLVED
 
-For every candidate instrument measure:
+The available experiment did not have enough observations or otherwise could not reach the predefined evidence threshold.
 
-- available history
-- spread/cost burden
-- typical movement
-- volatility
-- movement-to-cost
-- basic directional persistence
-- basic reversal behavior
-- session behavior where applicable
+### UNTESTED
 
-The central question remains:
+No meaningful experiment in the repository tests this behavior.
 
-"Does this market have enough movement relative to realistic trading costs to justify strategy construction?"
+### INVALID/UNAVAILABLE
 
-==================================================
-PHASE 5G — ECONOMIC VIABILITY GATE
-==================================================
+The behavior cannot currently be researched reliably because of data or infrastructure limitations.
 
-Use the existing research philosophy.
+Provide evidence for each classification.
 
-A behavior is NOT interesting merely because:
+Do NOT classify something as exhausted merely because a superficially similar strategy failed.
 
-- it has a positive average,
-- it has statistical significance,
-- it looks profitable before costs,
-- or it works in one period.
+## FIFTH: DETECT REDUNDANT RESEARCH
 
-The behavior must have enough movement to plausibly survive realistic transaction costs.
+Identify experiments that are behaviorally overlapping.
+
+For example, determine whether any apparently different experiments are actually variations of the same underlying hypothesis:
+
+* trend following vs trend alignment
+* pullback continuation vs momentum continuation
+* squeeze breakout vs volatility expansion
+* extreme fade vs mean reversion
+* candle momentum vs short-term momentum
+
+Do not force equivalence.
+
+For each overlap, explain:
+
+* why they are related
+* what dimension is actually different
+* whether testing another version would provide new information or simply repeat previous work
+
+## SIXTH: IDENTIFY THE RESEARCH FRONTIER
+
+After reconstructing the history, identify the genuinely unexplored behavioral dimensions.
+
+The output should answer:
+
+> "What important market behavior have we NOT meaningfully tested yet?"
+
+Do NOT give me strategy parameters.
+
+Do NOT give me optimized thresholds.
+
+Do NOT give me entry/exit rules.
+
+Do NOT write implementation code.
+
+Instead, identify research hypotheses at the conceptual level.
+
+Example format:
+
+* Behavioral dimension:
+* What has already been tested:
+* What remains untested:
+* Why it is genuinely different:
+* What evidence would distinguish it from previously tested ideas:
+* Data requirements:
+* Potential contamination/leakage risks:
+* Expected event-count concern:
+* Whether it is suitable for the existing DEV dataset:
+
+## SEVENTH: PRIORITIZE WITHOUT "PICKING A WINNER"
+
+Do NOT rank strategies by expected profitability.
+
+Instead, classify candidate research dimensions by research usefulness:
+
+### HIGH INFORMATION VALUE
+
+A result would materially expand what we know about the market.
+
+### MEDIUM INFORMATION VALUE
+
+Useful but overlaps substantially with existing research.
+
+### LOW INFORMATION VALUE
+
+Likely to repeat an already tested behavioral dimension.
+
+### BLOCKED
+
+Cannot be researched reliably with current data.
+
+This is a research-priority classification, NOT a profitability ranking.
+
+## EIGHTH: CHECK THE DATA LIMITATIONS
+
+Audit whether the existing DEV dataset is capable of supporting the remaining candidate dimensions.
+
+Explicitly check:
+
+* available date range
+* available symbols
+* M5 granularity
+* observed bid/ask spread availability
+* volume quality
+* missing data
+* zero-spread frequency
+* session/timezone information
+* news/event data availability
+* whether H4 aggregation is valid
+* whether cross-symbol synchronization is possible
+* whether enough observations exist for candidate event-based experiments
+
+Do not acquire new data.
+
+Do not use external data.
+
+Do not modify the dataset.
+
+## NINTH: CHECK RESEARCH-INTEGRITY RISKS
+
+Look specifically for:
+
+* lookahead bias
+* future-bar leakage
+* resampling leakage
+* signal/entry timing mistakes
+* use of incomplete candles
+* train/DEV contamination
+* validation/holdout access
+* threshold selection after observing results
+* hidden parameter sweeps
+* multiple-testing problems
+* duplicated experiments disguised as new hypotheses
+* cost-model inconsistencies
+* symbol-specific assumptions
+* accidental use of EURJPY
+* accidental use of zero/invalid volume
+
+If you find a concern, document it.
+
+DO NOT modify it.
+
+## TENTH: FINAL REPORT
+
+Produce a document named:
+
+RESEARCH_STATE_AUDIT.md
+
+The report must contain these sections:
+
+# Research State Audit
+
+## 1. Executive Summary
+
+State exactly where the research stands.
+
+## 2. Repository Evidence
+
+List the files inspected and what each contributed.
+
+## 3. Chronological Experiment History
+
+Table of all meaningful research experiments.
+
+## 4. Behavioral Dimension Matrix
 
 Use:
 
-movement-to-cost ratio = expected gross movement / realistic round-trip cost
+| Dimension | Tested? | Exhausted? | Status | Evidence |
+| --------- | ------- | ---------- | ------ | -------- |
 
-Classify findings as:
+## 5. Redundant / Overlapping Research
 
-1. ECONOMICALLY INSUFFICIENT
-2. BORDERLINE
-3. POTENTIALLY VIABLE
+Explain behavioral overlap.
 
-Do not invent arbitrary thresholds.
+## 6. Confirmed Rejections
 
-Use the project's existing viability logic and explain it.
+List experiments that should not be revisited unless a genuinely new hypothesis is introduced.
 
-==================================================
-PHASE 5H — IF A VIABLE BEHAVIOR IS FOUND
-==================================================
+## 7. Unresolved Experiments
 
-If and ONLY IF a behavior clearly reaches the project's viability bar:
+List experiments that remain unresolved and why.
 
-DO NOT immediately implement it.
+Do not silently upgrade unresolved → promising.
 
-Produce a candidate specification containing:
+## 8. Untested Behavioral Dimensions
 
-- instrument
-- timeframe
-- signal concept
-- entry timing
-- exit concept
-- expected movement
-- estimated realistic cost
-- movement-to-cost ratio
-- sample size
-- development period
-- known failure conditions
-- data limitations
-- reasons it deserves formal strategy validation
+This is the key section.
 
-Then STOP.
+Identify genuinely untested areas.
 
-Do not create Strategy 04 yet.
+## 9. Data Feasibility
 
-Do not touch bot.py.
+For each untested dimension, state whether the current DEV dataset can support research.
 
-We will review the candidate before implementation.
+## 10. Research-Integrity Findings
 
-==================================================
-PHASE 5I — IF NOTHING IS VIABLE
-==================================================
+Any leakage, split, execution, or cost-model concerns.
 
-If nothing clears the viability bar:
+## 11. Research Frontier
 
-DO NOT invent another strategy.
+Identify the remaining conceptual research directions.
 
-Instead give a clear decision among:
+For each:
 
-A. obtain better broker/tick/spread data
-B. investigate another timeframe
-C. investigate another instrument class
-D. change broker/data source
-E. reconsider the premise of this trading bot project
+* hypothesis
+* novelty relative to previous work
+* required data
+* likely event-count issue
+* major leakage risk
+* whether it can be pre-registered cleanly
 
-Explain which limitation is currently preventing credible strategy construction.
+## 12. Recommended NEXT AUDIT/RESEARCH TASK
 
-==================================================
-STRICT PROTECTION RULES
-==================================================
+Give ONE next research task at the conceptual level.
 
-DO NOT MODIFY:
+This must NOT be a strategy implementation.
 
-- bot.py
-- V1
-- V2
-- Strategy 01
-- Strategy 02
-- Strategy 03
+It should be phrased like:
 
-DO NOT:
+"Investigate whether X behavior exists in Y timeframe under Z pre-registered definition."
 
-- read validation data
-- read holdout data
-- change the 60/20/20 split
-- optimize parameters
-- run large parameter sweeps
-- tune thresholds repeatedly
-- create Strategy 04
-- alter frozen historical outputs
-- fabricate broker data
-- fabricate spread data
-- fabricate commission data
-- use lookahead
-- use future information
-- select results because they look profitable
+Do not provide optimized thresholds.
 
-Research code may be added under:
+Do not run the experiment.
 
-backtest/market_research/
+Do not implement it.
 
-Outputs may be written under:
+## 13. Explicit Stop Condition
 
-outputs/
+State that no strategy should be implemented or promoted until a future pre-registered DEV experiment clears the existing viability screen.
 
-==================================================
-OUTPUT
-==================================================
+## FINAL RULES
 
-Create:
+READ ONLY.
 
-PHASE_5_BROKER_DATA_AND_MARKET_EXPANSION.md
+No code modifications.
 
-If research code is required:
+No parameter changes.
 
-backtest/market_research/
+No strategy changes.
 
-If structured results are required:
+No bot changes.
 
-outputs/phase_5_market_research.json
+No V1/V2 changes.
 
-The report must contain:
+No backtests.
 
-1. Objective
-2. Current data audit
-3. Current cost-model audit
-4. Broker/account execution requirements
-5. Available historical data
-6. Missing data
-7. Timeframe construction assessment
-8. Broker-accurate cost assessment
-9. Existing FX behavior re-check
-10. Market expansion universe
-11. Instrument-level findings
-12. Movement-to-cost analysis
-13. Economically insufficient behaviors
-14. Borderline behaviors
-15. Potentially viable behaviors
-16. Exact evidence for any candidate
-17. Limitations
-18. Final decision
-19. Recommended next action
+No optimization.
 
-==================================================
-TESTS
-==================================================
+No parameter sweeps.
 
-If research code is added:
+No validation reads.
 
-Run the existing test suite.
+No holdout reads.
 
-Expected existing baseline:
+No external data.
 
-74 tests passing.
+No new strategy implementation.
 
-Do not modify tests simply to make them pass.
+No profitability predictions.
 
-==================================================
-STOP CONDITION
-==================================================
+No "best strategy."
 
-STOP after producing:
+No ranking by expected returns.
 
-PHASE_5_BROKER_DATA_AND_MARKET_EXPANSION.md
+The purpose of this task is to understand the research map and identify what has genuinely NOT been investigated yet.
 
-Do not implement any trading strategy.
+When finished, show me:
 
-Do not modify bot.py.
+1. The generated `RESEARCH_STATE_AUDIT.md`
+2. A concise summary of the most important findings
+3. The exact next research dimension identified by the audit
+4. Why it is genuinely different from everything already tested
 
-Do not connect to MT5.
-
-Do not start demo trading yet.
-
-Report exactly what was discovered and what the next concrete action should be.
-
-The goal is no longer "perform more research."
-
-The goal is:
-
-FIND WHETHER THERE IS A CREDIBLE MARKET/BEHAVIOR WORTH TURNING INTO THE FIRST DEMO STRATEGY.
+STOP after producing the audit.

@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "rule": {
+      "instrument": "EURGBP",
+      "N": 20,
+      "window": 60,
+      "k": 0.5,
+      "holds": [
+        12,
+        24
+      ],
+      "signal": "z of (logRetEURUSD - logRetGBPUSD)",
+      "hypothesis": "relative-strength continuation"
+    },
+    "data": "dev split of clean Dukascopy M5",
+    "cost_model": "real spread + 1.0 pip slip"
+  },
+  "result": {
+    "n": 12838,
+    "symbol": "EURGBP",
+    "timeframe": "H1",
+    "bars_min": 60,
+    "pip": 0.0001,
+    "trades": 12838,
+    "win_rate": 0.3993612712260477,
+    "avg_win_pips": 16.32100643651258,
+    "avg_loss_pips": -17.892504214758144,
+    "expectancy_net_pips": -4.228953107960747,
+    "profit_factor": 0.6064966720809222,
+    "gross_profit_pips": 104602.99999999999,
+    "gross_loss_pips": 110267.90000000005,
+    "total_net_pips": -54291.30000000022,
+    "net_usd_norm": -54291.30000000022,
+    "max_drawdown_pips": 54508.500000000226,
+    "avg_duration_bars": 12.0,
+    "avg_duration_hours": 12.0,
+    "exposure": 8.405041191554368,
+    "avg_cost_pips": 3.7876927870384796,
+    "total_cost_pips": 48626.4,
+    "commission": 0.0,
+    "movement_to_cost": 0.11649844528898015,
+    "mean_raw_pips": -0.4412603209222671,
+    "t_test": {
+      "n": 12838,
+      "t": -18.810594321092744,
+      "p": 6.18405957610657e-79,
+      "mean": -4.228953107960747,
+      "se": 0.22481762329107946
+    },
+    "years_count": 4,
+    "years_total": 4,
+    "years_positive_share": 0.0,
+    "max_year_share": 0.35814393834739455,
+    "max_window_share": 0.06892448698041839,
+    "yearly": {
+      "2021": {
+        "n": 3400,
+        "wins": 1393,
+        "net_pips": -12052.900000000003
+      },
+      "2022": {
+        "n": 3646,
+        "wins": 1461,
+        "net_pips": -19444.09999999998
+      },
+      "2023": {
+        "n": 4136,
+        "wins": 1692,
+        "net_pips": -15350.400000000025
+      },
+      "2024": {
+        "n": 1656,
+        "wins": 581,
+        "net_pips": -7443.90000000003
+      }
+    },
+    "long": {
+      "n": 6522,
+      "win_rate": 0.38439129101502606,
+      "net_pips": -30575.500000000022
+    },
+    "short": {
+      "n": 6316,
+      "win_rate": 0.4148195060164661,
+      "net_pips": -23715.800000000047
+    },
+    "regime_buckets": {
+      "normal": {
+        "n": 12838,
+        "net_pips": -54291.30000000007,
+        "avg": -4.228953107960747
+      }
+    },
+    "verdict": "INSUFF",
+    "reason": "movement-to-cost 0.12 (bar 1.0), |mean| 0.44 (bar 2.0)",
+    "bucket": "REJECTED"
+  }
+}
